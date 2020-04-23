@@ -1,6 +1,3 @@
-///<reference path='./rabbit/terminal-props.d.ts' />
-///<reference path='./rabbit/terminal.d.ts' />
-
 import {TerminalProps} from './rabbit/terminal-props';
 import {Terminal} from './index';
 
