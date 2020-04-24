@@ -1,11 +1,16 @@
-///<reference path='./terminal-js/terminal-js.d.ts' />
+export * from './terminal-js/index';
 
-declare module '@stripe/terminal-js' {
-  const loadStripeTerminal: () => Promise<StripeTerminal | null>;
+import {TerminalProps} from './terminal-js/rabbit/terminal-props';
+import {Terminal} from './terminal-js/index';
+
+export interface StripeTerminal {
+  create(props: TerminalProps): Terminal;
 }
 
+export const loadStripeTerminal: () => Promise<StripeTerminal | null>;
+
 interface Window {
-  // Stripe.js must be loaded directly from https://js.stripe.com/v3, which
-  // places a `Stripe` object on the window
-  StripeTerminal?: import('@stripe/terminal-js').StripeTerminal;
+  // Terminal's sdk.js must be loaded directly from https://js.stripe.com/v3, which
+  // places a `StripeTerminal` object on the window
+  StripeTerminal?: StripeTerminal;
 }

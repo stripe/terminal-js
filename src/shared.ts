@@ -23,13 +23,15 @@ const injectScript = (): HTMLScriptElement => {
   return script;
 };
 
-const registerWrapper = (stripe: any): void => {
-  if (!stripe || !stripe._registerWrapper) {
-    return;
-  }
+// TODO(jdivock): re-enable when we have a proper mechanism to track metrics
 
-  stripe._registerWrapper({name: 'terminal-js', version: _VERSION});
-};
+// const registerWrapper = (stripe: any): void => {
+//   if (!stripe || !stripe._registerWrapper) {
+//     return;
+//   }
+//
+//   stripe._registerWrapper({name: 'terminal-js', version: _VERSION});
+// };
 
 let stripePromise: Promise<StripeTerminal | null> | null = null;
 
