@@ -72,15 +72,3 @@ export const loadScript = (): Promise<StripeTerminal | null> => {
 
   return stripePromise;
 };
-
-export const initStripeTerminal = (
-  maybeStripeTerminal: StripeTerminal | null
-): StripeTerminal | null => {
-  if (maybeStripeTerminal === null) {
-    return null;
-  }
-
-  const stripeTerminal = maybeStripeTerminal;
-  registerWrapper(stripeTerminal);
-  return stripeTerminal;
-};

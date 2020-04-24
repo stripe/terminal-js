@@ -1,6 +1,6 @@
 ///<reference path='../types/index.d.ts' />
 import {StripeTerminal} from '@stripe/terminal-js';
-import {loadScript, initStripeTerminal} from './shared';
+import {loadScript} from './shared';
 
 // Execute our own script injection after a tick to give users time to do their
 // own script injection.
@@ -14,8 +14,8 @@ stripePromise.catch((err) => {
   }
 });
 
-export const loadStripe = (): Promise<StripeTerminal | null> => {
+export const loadStripeTerminal = (): Promise<StripeTerminal | null> => {
   loadCalled = true;
 
-  return stripePromise.then((maybeStripe) => initStripeTerminal(maybeStripe));
+  return stripePromise;
 };
