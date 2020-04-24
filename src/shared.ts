@@ -1,4 +1,4 @@
-import {StripeTerminal} from '@stripe/terminal-js';
+import {StripeTerminal} from '../types/index';
 
 // `_VERSION` will be rewritten by `@rollup/plugin-replace` as a string literal
 // containing the package.json version

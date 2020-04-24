@@ -1,5 +1,4 @@
-///<reference path='../types/index.d.ts' />
-import {StripeTerminal} from '@stripe/terminal-js';
+import {StripeTerminal} from '../types/index';
 import {loadScript} from './shared';
 
 // Execute our own script injection after a tick to give users time to do their

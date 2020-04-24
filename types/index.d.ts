@@ -9,8 +9,10 @@ export interface StripeTerminal {
 
 export const loadStripeTerminal: () => Promise<StripeTerminal | null>;
 
-interface Window {
-  // Terminal's sdk.js must be loaded directly from https://js.stripe.com/v3, which
-  // places a `StripeTerminal` object on the window
-  StripeTerminal?: StripeTerminal;
+declare global {
+  interface Window {
+    // Terminal's sdk.js must be loaded directly from https://js.stripe.com/v3, which
+    // places a `StripeTerminal` object on the window
+    StripeTerminal?: StripeTerminal;
+  }
 }
