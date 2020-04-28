@@ -14,7 +14,7 @@
     "typecheck": "tsc",
     "build": "yarn clean && yarn rollup -c",
     "clean": "rimraf dist",
-    "ci": "yarn lint && yarn test && yarn test:versions && yarn test:types && yarn typecheck && yarn build",
+    "ci": "yarn lint && yarn test && yarn typecheck && yarn build",
     "prepublishOnly": "echo \"\nPlease use ./scripts/publish instead\n\" && exit 1",
     "prettier": "prettier './**/*.{js,ts,md,html,css}' --write",
     "prettier-list-different": "prettier './**/*.{js,ts,md,html,css}' --list-different"
@@ -26,7 +26,7 @@
   ],
   "author": "Stripe (https://www.stripe.com)",
   "license": "MIT",
-  "homepage": "https://stripe.com/docs/js",
+  "homepage": "https://stripe.com/docs/terminal/sdk/js",
   "files": [
     "dist",
     "src",
