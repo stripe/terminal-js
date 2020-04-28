@@ -1,119 +1,101 @@
-# Stripe.js ES Module
+# Terminal JS ES Module
 
-Use [Stripe.js](https://stripe.com/docs/stripe-js) as an ES module.
+Use the [Terminal JS](https://stripe.com/docs/terminal/sdk/js) as an ES module.
 
 **Note**: To be
 [PCI compliant](https://stripe.com/docs/security#validating-pci-compliance), you
-must load Stripe.js directly from `https://js.stripe.com`. You cannot include it
-in a bundle or host it yourself. This package wraps the global `Stripe` function
-provided by the Stripe.js script as an ES module.
+must load the SDK directly from `https://js.stripe.com`. You cannot include it
+in a bundle or host it yourself. This package wraps the global `StripeTerminal` function
+provided by the the SDK script as an ES module.
 
-[![npm version](https://img.shields.io/npm/v/@stripe/stripe-js.svg?style=flat-square)](https://www.npmjs.com/package/@stripe/stripe-js)
+[![npm version](https://img.shields.io/npm/v/@stripe/terminal-js.svg?style=flat-square)](https://www.npmjs.com/package/@stripe/terminal-js)
 
 ## Installation
 
-Use `npm` to install the Stripe.js module:
+Use `npm` to install the Terminal JS module:
 
 ```sh
-npm install @stripe/stripe-js
+npm install @stripe/terminal-js
 ```
 
 ## Usage
 
-### `loadStripe`
+### `loadStripeTerminal`
 
-This function returns a `Promise` that resolves with a newly created `Stripe`
-object once Stripe.js has loaded. If necessary, it will load Stripe.js for you
-by inserting the Stripe.js script tag. If you call `loadStripe` in a server
+This function returns a `Promise` that resolves with a newly created `StripeTerminal`
+object once the Terminal JS SDK has loaded. If necessary, it will load the SDK for you
+by inserting the Terminal JS script tag. If you call `loadStripeTerminal` in a server
 environment it will resolve to `null`.
 
 ```js
-import {loadStripe} from '@stripe/stripe-js';
+import {loadStripeTerminal} from '@stripe/terminal-js';
 
-const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+const StripTerminal = await loadStripeTerminal();
+
+const terminal = StripeTerminal.create({
+  onFetchConnectionToken: async () => {
+    …
+  }
+})
 ```
 
-We’ve placed a random API key in this example. Replace it with your
-[actual publishable API keys](https://dashboard.stripe.com/account/apikeys) to
-test this code through your Stripe account.
-
-For more information on how to use Stripe.js once it loads, please refer to the
-[Stripe.js API reference](https://stripe.com/docs/js) or learn to
-[accept a payment](https://stripe.com/docs/payments/accept-a-payment) with
-Stripe.
+For more information on how to use the Terminal JS SDK once it loads, please refer to the
+[Terminal JS SDK API reference](https://stripe.com/docs/terminal/js-api-reference) or follow our [getting started](https://stripe.com/docs/terminal/sdk/js) guide.
 
 ## TypeScript support
 
-This package includes TypeScript declarations for Stripe.js. We support projects
+This package includes TypeScript declarations for the Terminal JS SDK. We support projects
 using TypeScript versions >= 3.1.
 
-Some methods in Stripe.js accept and return objects from the
+Some methods in Terminal JS SDK accept and return objects from the
 [Stripe API](https://stripe.com/docs/api). The type declarations in
-`@stripe/stripe-js` for these objects in will always track the
-[latest version](https://stripe.com/docs/api/versioning) of the Stripe API. If
-you would like to use these types but are using an older version of the Stripe
-API, we recommend
-[updating to the latest version](https://stripe.com/docs/upgrades#how-can-i-upgrade-my-api),
-or ignoring and overriding the type definitions as necessary.
+`@stripe/terminal-js` for these objects in currently track to
+[version 2018-08-23](https://stripe.com/docs/api/versioning) of the Stripe API. If you have code using other versions of the Stripe API you may have to override type definitions as necessary.
 
 Note that we may release new [minor and patch](https://semver.org/) versions of
-`@stripe/stripe-js` with small but backwards-incompatible fixes to the type
-declarations. These changes will not affect Stripe.js itself.
+`@stripe/terminal-js` with small but backwards-incompatible fixes to the type
+declarations. These changes will not affect the Terminal JS SDK itself.
 
-## Ensuring Stripe.js is available everywhere
+## Ensuring the Terminal JS SDK is available everywhere
 
-To best leverage Stripe’s advanced fraud functionality, ensure that Stripe.js is
-loaded on every page, not just your checkout page. This allows Stripe to detect
-anomalous behavior that may be indicative of fraud as customers browse your
-website.
-
-By default, this module will insert a `<script>` tag that loads Stripe.js from
+By default, this module will insert a `<script>` tag that loads the Terminal JS SDK from
 `https://js.stripe.com`. This happens as a side effect immediately upon
-importing this module. If you utilize code splitting or only include your
-JavaScript app on your checkout page, the Stripe.js script will only be
-available in parts of your site. To ensure Stripe.js is available everywhere,
-you can perform either of the following steps:
+importing this module.
 
 ### Import as a side effect
 
-Import `@stripe/stripe-js` as a side effect in code that will be included
-throughout your site (e.g. your root module). This will make sure the Stripe.js
+Import `@stripe/terminal-js` as a side effect in code that will be included
+throughout your site (e.g. your root module). This will make sure the Terminal JS SDk
 script tag is inserted immediately upon page load.
 
 ```js
-import '@stripe/stripe-js';
+import '@stripe/terminal-js';
 ```
 
 ### Manually include the script tag
 
 Manually add the Stripe.js script tag to the `<head>` of each page on your site.
 If an existing script tag is already present, this module will not insert a new
-one. When you call `loadStripe`, it will use the existing script tag.
+one. When you call `loadStripeTerminal`, it will use the existing script tag.
 
 ```html
 <!-- Somewhere in your site's <head> -->
-<script src="https://js.stripe.com/v3" async></script>
+<script src="https://js.stripe.com/terminal/v1/" async></script>
 ```
 
-### Importing `loadStripe` without side effects
+### Importing `loadStripeTerminal` without side effects
 
-If you would like to use `loadStripe` in your application, but defer loading the
-Stripe.js script until `loadStripe` is first called, use the alternative
-`@stripe/stripe-js/pure` import path:
+If you would like to use `loadStripeTerminal` in your application, but defer loading the
+Terminal JS SDK script until `loadStripeTerminal` is first called, use the alternative
+`@stripe/terminal-js/pure` import path:
 
 ```
-import {loadStripe} from '@stripe/stripe-js/pure';
+import {loadStripeTerminal} from '@stripe/terminal-js/pure';
 
-// Stripe.js will not be loaded until `loadStripe` is called
+// Terminal SDK will not be loaded until `loadStripeTerminal` is called
 ```
 
-## Stripe.js Documentation
+## Terminal JS SDK Documentation
 
-- [Stripe.js Docs](https://stripe.com/docs/stripe-js)
-- [Stripe.js Reference](https://stripe.com/docs/api)
-- [React Stripe.js Docs](https://stripe.com/docs/stripe-js/react)
-
-### Contributing
-
-If you would like to contribute to React Stripe.js, please make sure to read our
-[contributor guidelines](CONTRIBUTING.md).
+- [Terminal JS SDK Docs](https://stripe.com/docs/terminal/sdk/js)
+- [Terminal JS SDK API Reference](https://stripe.com/docs/terminal/js-api-reference)
