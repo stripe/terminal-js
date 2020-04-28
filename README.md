@@ -12,10 +12,12 @@ provided by the the SDK script as an ES module.
 
 ## Installation
 
-Use `npm` to install the Terminal JS module:
+Use `npm` or `yarn` to install the Terminal JS module:
 
 ```sh
-npm install @stripe/terminal-js
+> npm install @stripe/terminal-js
+
+> yarn add @stripe/terminal-js
 ```
 
 ## Usage
@@ -30,7 +32,7 @@ environment it will resolve to `null`.
 ```js
 import {loadStripeTerminal} from '@stripe/terminal-js';
 
-const StripTerminal = await loadStripeTerminal();
+const StripeTerminal = await loadStripeTerminal();
 
 const terminal = StripeTerminal.create({
   onFetchConnectionToken: async () => {

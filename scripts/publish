@@ -61,7 +61,7 @@ create_github_release_fallback() {
   cat << EOF
 Remember to create a release on GitHub with a changelog notes:
 
-    https://github.com/stripe/stripe-js/releases/new
+    https://github.com/stripe/terminal-js/releases/new
 
 EOF
 }
