@@ -1,3 +1,3 @@
-///<reference path='./types/index.d.ts' />
+import {loadStripeTerminal as lst} from './src/pure';
 
-export const loadStripe: typeof import('@stripe/stripe-js').loadStripe;
+export const loadStripeTerminal: typeof lst;
