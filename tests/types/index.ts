@@ -10,6 +10,8 @@ import {
   DiscoveredReaders,
   DiscoverResult,
   Reader,
+  ErrorResponse,
+  SdkManagedPaymentIntent,
 } from '../../types/index';
 
 declare const StripeTerminal: IStripeTerminal;
@@ -25,9 +27,37 @@ const main = async () => {
 
   terminal.overrideBaseURL('http://foo');
 
-  const discoverResult = await terminal.discoverReaders({
+  const discoverResult:
+    | DiscoverResult
+    | ErrorResponse = await terminal.discoverReaders({
     device_type: 'foo',
   });
+
+  const reader: {reader: Reader} | ErrorResponse = await terminal.connectReader(
+    {
+      id: 'id',
+      object: 'object',
+      device_type: 'type',
+      ip_address: 'address',
+      serial_number: 'serial',
+    }
+  );
+
+  const connReader: Reader = terminal.getConnectedReader();
+
+  terminal.disconnectReader();
+
+  const clearResp: {} | ErrorResponse = terminal.clearCachedCredentials();
+
+  const clearDispResp: {} | ErrorResponse = terminal.clearReaderDisplay();
+
+  const setDispResp: {} | ErrorResponse = terminal.setReaderDisplay({
+    type: 'type',
+  });
+
+  const payIntent:
+    | {paymentIntent: SdkManagedPaymentIntent}
+    | ErrorResponse = await terminal.collectPaymentMethod('pay_intent');
 };
 
 main();

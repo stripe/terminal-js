@@ -1,6 +1,7 @@
 # Terminal JS ES Module
 
-Use the [Terminal JS](https://stripe.com/docs/terminal/sdk/js) as an ES module.
+Use the [Terminal JS SDK](https://stripe.com/docs/terminal/sdk/js) as an ES
+module.
 
 **Note**: To be
 [PCI compliant](https://stripe.com/docs/security#validating-pci-compliance), you
