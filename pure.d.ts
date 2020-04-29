@@ -1,3 +1,3 @@
-import {loadStripeTerminal as lst} from './src/pure';
+import {loadStripeTerminal as IloadStripeTerminal} from './src/pure';
 
-export const loadStripeTerminal: typeof lst;
+export const loadStripeTerminal: typeof IloadStripeTerminal;
