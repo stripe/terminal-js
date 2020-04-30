@@ -5,7 +5,7 @@ import PaymentIntentClient from './payment-intent-client';
 import { Reader } from './discovery-client';
 import DiscoveryService, { DiscoveryConfig, DiscoverResult } from './discovery.service';
 import { TerminalCallbacks } from './terminal-props';
-import { Try, ErrorResponse } from '../utils/error-utils';
+import { Try } from '../utils/error-utils';
 import { PaymentIntentClientSecret, PaymentStatus, ConnectionStatus, SdkManagedPaymentIntent, ConnectOptions, RefundOptions } from './terminal-transaction-models';
 import ConnectionTokenMgr from './connection-token-mgr';
 import { StripeApiModels } from '../ixmodel/app/model/com/goindex/proto/stripe.model';
@@ -44,7 +44,7 @@ export default class Terminal {
     /**
      * Returns a promise that resolves with discovered readers that can be connected to.
      */
-    discoverReaders(config?: DiscoveryConfig): Promise<DiscoverResult | ErrorResponse>;
+    discoverReaders(config?: DiscoveryConfig): Promise<Try<DiscoverResult>>;
     /**
      * Returns a promise that resolves only when the SDK has connected to a Reader.
      */
