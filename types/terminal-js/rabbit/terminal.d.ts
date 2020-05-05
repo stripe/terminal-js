@@ -5,7 +5,7 @@ import PaymentIntentClient from './payment-intent-client';
 import { Reader } from './discovery-client';
 import DiscoveryService, { DiscoveryConfig, DiscoverResult } from './discovery.service';
 import { TerminalCallbacks } from './terminal-props';
-import { Try } from '../utils/error-utils';
+import { ErrorResponse } from '../utils/error-utils';
 import { PaymentIntentClientSecret, PaymentStatus, ConnectionStatus, SdkManagedPaymentIntent, ConnectOptions, RefundOptions } from './terminal-transaction-models';
 import ConnectionTokenMgr from './connection-token-mgr';
 import { StripeApiModels } from '../ixmodel/app/model/com/goindex/proto/stripe.model';
@@ -44,13 +44,13 @@ export default class Terminal {
     /**
      * Returns a promise that resolves with discovered readers that can be connected to.
      */
-    discoverReaders(config?: DiscoveryConfig): Promise<Try<DiscoverResult>>;
+    discoverReaders(config?: DiscoveryConfig): Promise<DiscoverResult | ErrorResponse>;
     /**
      * Returns a promise that resolves only when the SDK has connected to a Reader.
      */
-    connectReader(reader: Reader, connectOptions?: ConnectOptions): Promise<Try<{
+    connectReader(reader: Reader, connectOptions?: ConnectOptions): Promise<ErrorResponse | {
         reader: Reader;
-    }>>;
+    }>;
     /**
      * Returns the current connected reader.
      */
@@ -63,16 +63,16 @@ export default class Terminal {
     /**
      * Clears the cached connection token or rabbit sessions
      */
-    clearCachedCredentials(): Promise<Try<{}>>;
+    clearCachedCredentials(): Promise<{} | ErrorResponse>;
     /**
      * Ends the Checkout Flow. This brings teh UX back to the splash screen.
      */
-    clearReaderDisplay(): Promise<Try<{}>>;
+    clearReaderDisplay(): Promise<{} | ErrorResponse>;
     /**
      * Updates the PIN Pad UI with information on the basket the user is buying
      * @param request Request object containing information on the basket
      */
-    setReaderDisplay(request: SetReaderDisplayRequest): Promise<Try<{}>>;
+    setReaderDisplay(request: SetReaderDisplayRequest): Promise<ErrorResponse | {}>;
     /**
      * Requests the Terminal object to collect a card source from the reader that
      * can be charged.
@@ -81,28 +81,28 @@ export default class Terminal {
      */
     collectPaymentMethod(request: PaymentIntentClientSecret, options?: {
         tip_configuration?: TipConfiguration;
-    }): Promise<Try<{
+    }): Promise<ErrorResponse | {
         paymentIntent: SdkManagedPaymentIntent;
-    }>>;
+    }>;
     /**
      * Confirms the payment intent which causes the charging of the user card.
      * @param request Object containing the payment intent to confirm.
      */
-    processPayment(request: SdkManagedPaymentIntent): Promise<Try<{
+    processPayment(request: SdkManagedPaymentIntent): Promise<ErrorResponse | {
         paymentIntent: PaymentIntent;
-    }>>;
-    cancelCollectPaymentMethod(): Promise<Try<{}>>;
+    }>;
+    cancelCollectPaymentMethod(): Promise<ErrorResponse | {}>;
     readReusableCard(options?: {
         customer?: string;
-    }): Promise<Try<{
+    }): Promise<ErrorResponse | {
         payment_method: any;
-    }>>;
-    collectRefundPaymentMethod(charge_id: string, amount: number, currency: string, options?: RefundOptions): Promise<Try<{}>>;
-    processRefund(): Promise<Try<{
+    }>;
+    collectRefundPaymentMethod(charge_id: string, amount: number, currency: string, options?: RefundOptions): Promise<ErrorResponse | {}>;
+    processRefund(): Promise<ErrorResponse | {
         refund: any;
-    }>>;
-    cancelCollectRefundPaymentMethod(): Promise<Try<{}>>;
-    cancelReadReusableCard(): Promise<Try<{}>>;
+    }>;
+    cancelCollectRefundPaymentMethod(): Promise<ErrorResponse | {}>;
+    cancelReadReusableCard(): Promise<ErrorResponse | {}>;
     setSimulatorConfiguration(config: Object): void;
     getSimulatorConfiguration(): import("./jack-rabbit-connection-mgr").SimulatorConfiguration;
     private fetchPaymentIntent;
