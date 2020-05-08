@@ -112,4 +112,11 @@ export default class Terminal {
     private setPaymentStatus;
     private setConnectionStatus;
     overrideBaseURL(url: string): void;
+    /**
+     * Requests the Terminal object to resume to collect a card source from the reader that
+     * can be charged.
+     * @param request Request object is the payment intent
+     */
+    private resumeCollectPaymentMethod;
+    private startResumingCollectPaymentMethod;
 }

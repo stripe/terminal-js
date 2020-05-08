@@ -18,6 +18,7 @@ import QueryPaymentMethodRequest = rabbit_api_jackrabbitservice.QueryPaymentMeth
 import QueryPaymentMethodResponse = rabbit_api_jackrabbitservice.QueryPaymentMethodResponse;
 import ConfirmPaymentRequest = rabbit_api_jackrabbitservice.ConfirmPaymentRequest;
 import ConfirmPaymentResponse = rabbit_api_jackrabbitservice.ConfirmPaymentResponse;
+import ResumeCollectPaymentRequest = rabbit_api_jackrabbitservice.ResumeCollectPaymentRequest;
 import CancelCollectPaymentMethodRequest = rabbit_api_jackrabbitservice.CancelCollectPaymentMethodRequest;
 import CancelCollectPaymentMethodResponse = rabbit_api_jackrabbitservice.CancelCollectPaymentMethodResponse;
 import CollectReusableCardRequest = rabbit_api_jackrabbitservice.CollectReusableCardRequest;
@@ -49,6 +50,7 @@ export default class IxJackRabbitRpcService extends IxSerializedRpcService {
     collectPaymentMethod(request: CollectPaymentMethodRequest, sessionToken: SessionToken): Promise<CollectPaymentMethodResponse>;
     queryPaymentMethod(request: QueryPaymentMethodRequest, sessionToken: SessionToken): Promise<QueryPaymentMethodResponse>;
     confirmPayment(request: ConfirmPaymentRequest, sessionToken: SessionToken): Promise<ConfirmPaymentResponse>;
+    resumeCollectPaymentMethod(request: ResumeCollectPaymentRequest, sessionToken: SessionToken): Promise<ConfirmPaymentResponse>;
     cancelCollectPaymentMethod(request: CancelCollectPaymentMethodRequest, sessionToken: SessionToken): Promise<CancelCollectPaymentMethodResponse>;
     collectReusableCard(request: CollectReusableCardRequest, sessionToken: SessionToken): Promise<CollectReusableCardResponse>;
     queryCollectReusableCard(request: QueryCollectReusableCardRequest, sessionToken: SessionToken): Promise<QueryCollectReusableCardResponse>;
