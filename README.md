@@ -3,11 +3,13 @@
 Use the [Terminal JS SDK](https://stripe.com/docs/terminal/sdk/js) as an ES
 module.
 
-**Note**: To be
+**Note**: This package dynamically loads the Stripe Terminal SDK from 
+`https://js.stripe.com` and wraps the SDK's global`StripeTerminal` function. 
+To be
 [PCI compliant](https://stripe.com/docs/security#validating-pci-compliance), you
-must load the SDK directly from `https://js.stripe.com`. You cannot include it
-in a bundle or host it yourself. This package wraps the global `StripeTerminal`
-function provided by the the SDK script as an ES module.
+must load the SDK directly from `https://js.stripe.com` using this library or by
+[loading it in your HTML with a `<script>` tag](https://stripe.com/docs/terminal/sdk/js). You cannot include the
+SDK in a bundle or host it yourself.
 
 [![npm version](https://img.shields.io/npm/v/@stripe/terminal-js.svg?style=flat-square)](https://www.npmjs.com/package/@stripe/terminal-js)
 
