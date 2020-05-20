@@ -10,9 +10,8 @@ export interface InternetMethodConfiguration extends DiscoveryMethodConfiguratio
     location?: string;
 }
 export declare type DiscoveryConfig = InternetMethodConfiguration;
-export declare type DiscoveredReaders = Reader[];
 export declare type DiscoverResult = {
-    discoveredReaders: DiscoveredReaders;
+    discoveredReaders: Array<Reader>;
 };
 export declare type UserDiscoveryCallback = (result: DiscoverResult) => void;
 export declare type UserDiscoveryErrorCallback = (error: ExposedError) => void;
@@ -20,6 +19,7 @@ export declare const DEFAULT_DISCOVERY_CONFIG: InternetMethodConfiguration;
 export declare abstract class BaseDiscoverMethod<T extends DiscoveryConfig> {
     protected config: T;
     constructor(config: T);
+    abstract retrieveReader(id: string): Promise<Reader>;
     abstract startDiscovery(onDiscoveredReaders: DiscoveredReadersCallback, onCriticalError: DiscoveryErrorCallback): void;
     abstract stopDiscovery(): void;
 }
@@ -31,13 +31,16 @@ export declare class InternetDiscoveryMethod extends BaseDiscoverMethod<Internet
     private queryIntervalMs;
     private intervalId;
     constructor(config: InternetMethodConfiguration, discoveryClient: DiscoveryClient, queryIntervalMs?: number);
+    retrieveReader(id?: string): Promise<Reader>;
     startDiscovery(onDiscoveredReaders: DiscoveredReadersCallback, onCriticalError: DiscoveryErrorCallback): void;
     stopDiscovery(): void;
 }
+export declare const SIMULATED_ID = "SIMULATOR";
+export declare const SIMULATED_LABEL = "Reader Simulator";
+export declare const SIMULATED_READER: Reader;
 export declare class SimulatedDiscoveryMethod extends BaseDiscoverMethod<any> {
-    static SIMULATED_ID: string;
-    static SIMULATED_LABEL: string;
     constructor(config: DiscoveryMethodConfiguration);
+    retrieveReader(id: string): Promise<Reader>;
     startDiscovery(onDiscoveredReaders: DiscoveredReadersCallback): void;
     stopDiscovery(): void;
 }
@@ -60,9 +63,10 @@ export default class DiscoveryService {
     private nextResult;
     constructor(discoveryMethodFactory: DiscoveryMethodFactory);
     getDiscoveredReaders(): DiscoverResult;
+    retrieveReader(id: string): Promise<Reader>;
     discoverReaders(config?: DiscoveryConfig): Promise<DiscoverResult>;
     startDiscovery(config: DiscoveryConfig, userDiscoveryCallback: UserDiscoveryCallback, errorCallback: UserDiscoveryErrorCallback): void;
     stopDiscovery(): void;
 }
-export declare type DiscoveredReadersCallback = (readers: DiscoveredReaders) => void;
+export declare type DiscoveredReadersCallback = (readers: Array<Reader>) => void;
 export declare type DiscoveryErrorCallback = (error: Error) => void;

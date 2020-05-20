@@ -9,7 +9,7 @@ export interface Reader {
     ip_address: string;
     label?: string;
     serial_number: string;
-    status?: string;
+    status?: 'offline' | 'online';
     location?: string;
     base_url?: string;
 }
@@ -20,6 +20,7 @@ export default class DiscoveryClient extends IxStripeRestClient<Reader> {
     private connectionTokenMgr;
     constructor(httpClient: IxHttpClientService, connectionTokenMgr: ConnectionTokenMgr, networkMonitor: NetworkMonitor);
     handlePosRpcSessionResponse?: (response: PosRpcSessionResponse) => void;
+    retrieveReader(id?: string): Promise<Reader>;
     discoverReaders(params: {
         location?: string;
         device_type?: string;

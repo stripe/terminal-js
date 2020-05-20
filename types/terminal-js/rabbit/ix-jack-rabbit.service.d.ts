@@ -58,7 +58,6 @@ export default class IxJackRabbitService {
     setReaderDisplay(request: SetReaderDisplayRequest): Promise<SetReaderDisplayResponse>;
     clearReaderDisplay(): Promise<ClearReaderDisplayResponse>;
     collectPaymentMethod(request: CollectPaymentMethodRequest): CollectPaymentMethodAttempt;
-    resumeCollectPaymentMethod(paymentIntentId: string): CollectPaymentMethodAttempt;
     confirmPayment(request: ConfirmPaymentRequest): Promise<ConfirmPaymentResponse>;
     collectInteracRefundMethod(options: CollectInteracRefundMethodRequest): Cancelable<rabbit_model_jackrabbittender.PaymentMethod>;
     confirmInteracRefund(options: ConfirmInteracRefundRequest): Promise<rabbit_api_jackrabbitservice.ConfirmInteracRefundResponse>;
@@ -67,6 +66,5 @@ export default class IxJackRabbitService {
     private clearTransactionContext;
     private cancelCollectPaymentMethod;
     private collectAndQueryUntilPaymentMethod;
-    private resumeCollectAndQueryUntilPaymentMethod;
     private queryPaymentMethod;
 }
