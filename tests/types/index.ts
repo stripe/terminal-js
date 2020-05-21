@@ -7,7 +7,6 @@ import {assert, Has} from 'conditional-type-checks';
 import {
   loadStripeTerminal,
   StripeTerminal as IStripeTerminal,
-  DiscoveredReaders,
   DiscoverResult,
   Reader,
   ErrorResponse,
