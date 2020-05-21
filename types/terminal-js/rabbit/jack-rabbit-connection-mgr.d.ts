@@ -21,7 +21,7 @@ export declare type JackRabbitRpcServiceFactory = (endpoint: RpcEndpoint) => IxJ
 export declare type JackRabbitMethod<T> = (rpcClient: IxJackRabbitRpcService, sessionToken: SessionToken) => Promise<T>;
 export declare function rpcEndpointFromReader(simulatorBaseUrl: string, reader: Reader): RpcEndpoint;
 export declare function rabbitErrorMapper<T>(err: IxRpcError | Error): IxRabbitError;
-export declare const SIMULATED_READER_URL = "https://b5rxknncfl.execute-api.us-west-1.amazonaws.com/prod";
+export declare const SIMULATED_READER_URL = "https://terminal-simulator.stripe.com";
 /**
  * The {@code JackRabbitConnectionMgr} manages a connection to a Rabbit PIN pad
  * including resolving the ip through discovery and authenticating to it via

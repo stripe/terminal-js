@@ -21,9 +21,6 @@ export declare namespace rabbit_api_jackrabbitservice {
         decline_response?: StripeApiModels.ErrorWrapper;
         confirm_error?: rabbit_model_jackrabbittender.Error;
     }
-    interface ResumeCollectPaymentRequest {
-        payment_intent_id?: string;
-    }
     interface CollectReusableCardRequest {
     }
     interface CollectReusableCardResponse {
