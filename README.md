@@ -7,9 +7,8 @@ module.
 `https://js.stripe.com` and wraps the SDK's global`StripeTerminal` function. 
 To be
 [PCI compliant](https://stripe.com/docs/security#validating-pci-compliance), you
-must load the SDK directly from `https://js.stripe.com` using this library or by
-[loading it in your HTML with a `<script>` tag](https://stripe.com/docs/terminal/sdk/js). You cannot include the
-SDK in a bundle or host it yourself.
+must load the SDK directly from `https://js.stripe.com` by using this library.
+You cannot include the dynamically loaded code in a bundle or host it yourself.
 
 [![npm version](https://img.shields.io/npm/v/@stripe/terminal-js.svg?style=flat-square)](https://www.npmjs.com/package/@stripe/terminal-js)
 
