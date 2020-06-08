@@ -2,4 +2,4 @@ dist
 node_modules
 examples
 tests/types
-types/terminal-js
+types/proto.d.ts
