@@ -9,6 +9,7 @@ import {
   StripeTerminal as IStripeTerminal,
   DiscoverResult,
   Reader,
+  IErrorResponse,
   ErrorResponse,
   SdkManagedPaymentIntent,
 } from '../../types/index';

@@ -1,4 +1,4 @@
 node_modules
 dist
 package.json
-types/terminal-js
+types/proto.d.ts

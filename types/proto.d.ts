@@ -1,0 +1,532 @@
+/** Properties of a RequestedCardPresent. */
+interface IRequestedCardPresent {
+  /** Type of card present information */
+  type?: string | null;
+
+  /** Method used by POS to read the card */
+  read_method?: string | null;
+
+  /** Reason for card swipe */
+  swipe_reason?: string | null;
+
+  /** Encrypted or unencrypted track 2 data (depending on "type" field) */
+  track_2?: string | null;
+
+  /** Processing method */
+  emv_processing_method?: string | null;
+
+  /** Encrypted or unencrypted EMV data (depending on "type" field) */
+  emv_data?: string | null;
+
+  /** The PIN block used in transactions backed by PIN */
+  pin_block?: string | null;
+
+  /** Key Serial Number for the PIN block encryption */
+  pin_block_ksn?: string | null;
+
+  /** Reader ID from activate */
+  reader?: string | null;
+
+  /** Key type used to encrypt track_2 */
+  track_2_key_type?: string | null;
+
+  /** Key ID of key used to encrypt track_2 */
+  track_2_key_id?: string | null;
+
+  /** KSN used ot encrypt track_2 */
+  track_2_ksn?: string | null;
+}
+/** Properties of a RequestedPaymentMethod. */
+interface IRequestedPaymentMethod {
+  /** Type of payment method (e.g. "card_present") */
+  type?: string | null;
+
+  /** Map of card present parameters */
+  card_present?: IRequestedCardPresent | null;
+
+  /** Interac card present */
+  interac_present?: IRequestedCardPresent | null;
+}
+/** Properties of a RefundChargeRequest. */
+interface IRefundChargeRequest {
+  /** RefundChargeRequest charge */
+  charge?: string | null;
+
+  /** RefundChargeRequest reason */
+  reason?: string | null;
+
+  /** RefundChargeRequest refund_application_fee */
+  refund_application_fee?: boolean | null;
+
+  /** RefundChargeRequest reverse_transfer */
+  reverse_transfer?: boolean | null;
+
+  /** RefundChargeRequest payment_method_data */
+  payment_method_data?: IRequestedPaymentMethod | null;
+
+  /** RefundChargeRequest amount */
+  amount?: number | null;
+}
+/** Properties of a TipOption. */
+interface ITipOption {
+  /** REQUIRED: Amount of this tip option */
+  amount?: number | null;
+
+  /** Descriptor of the amount, displayed in the button */
+  label?: string | null;
+}
+/** Properties of a TipConfiguration. */
+export interface ITipConfiguration {
+  /** List of at most 3 options */
+  options?: ITipOption[] | null;
+
+  /** Hide the custom amount button */
+  hide_custom_amount?: boolean | null;
+}
+/** Properties of a TipSelection. */
+interface ITipSelection {
+  /** Amount associated with the selection */
+  amount?: number | null;
+}
+/** CreditCardBrand enum. */
+type CreditCardBrand =
+  | 'INVALID_CREDIT_CARD_BRAND'
+  | 'UNKNOWN_CREDIT'
+  | 'AMERICAN_EXPRESS'
+  | 'DINERS'
+  | 'DISCOVER'
+  | 'JCB'
+  | 'MASTERCARD'
+  | 'VISA'
+  | 'CUP';
+
+/** CardEntryMethod enum. */
+type CardEntryMethod =
+  | 'INVALID_ENTRY_METHOD'
+  | 'CHIP_READ'
+  | 'CONTACTLESS'
+  | 'FSWIPE'
+  | 'KEYED'
+  | 'SWIPED'
+  | 'BARCODE_READ';
+/** Properties of a CardPaymentMethod. */
+interface ICardPaymentMethod {
+  /** Masked card data */
+  masked_pan?: string | null;
+
+  /** The card expiration date */
+  expiration_date?: string | null;
+
+  /** Brand of credit card tender, determined by BIN table lookup */
+  card_brand?: CreditCardBrand | null;
+
+  /** Entry method of payment */
+  card_entry_method?: CardEntryMethod | null;
+}
+/** Properties of a PaymentMethod. */
+export interface IPaymentMethod {
+  /** PaymentMethod card_payment */
+  card_payment?: ICardPaymentMethod | null;
+
+  /** Tip selection chosen by the cardholder */
+  tip_selection?: ITipSelection | null;
+}
+/** Properties of an ErrorResponse. */
+export interface IErrorResponse {
+  /** The type of error returned. */
+  type?: string | null;
+
+  /** ID of failed charge */
+  charge?: string | null;
+
+  /** For some errors that could be handled programmatically, a short string indicating the error code reported. (https://stripe.com/docs/error-codes) */
+  code?: string | null;
+
+  /** For card errors resulting from a card issuer decline, a short string indicating the card issuer’s reason for the decline if they provide one. (https://stripe.com/docs/declines#issuer-declines) */
+  decline_code?: string | null;
+
+  /** A URL to more information about the error code reported. */
+  doc_url?: string | null;
+
+  /** A human-readable message providing more details about the error. For card errors, these messages can be shown to your users. */
+  message?: string | null;
+
+  /** If the error is parameter-specific, the parameter related to the error. For example, you can use this to display a message near the correct form field. */
+  param?: string | null;
+
+  /** Source used for the error */
+  source?: ISource | null;
+
+  /** Payment intent used for the error */
+  payment_intent?: IPaymentIntent | null;
+}
+/** Properties of an Owner. */
+export interface IOwner {
+  /** Owner address */
+  address?: string | null;
+
+  /** Owner email */
+  email?: string | null;
+
+  /** Owner name */
+  name?: string | null;
+
+  /** Owner phone */
+  phone?: string | null;
+
+  /** Owner verified_address */
+  verified_address?: string | null;
+
+  /** Owner verified_email */
+  verified_email?: string | null;
+
+  /** Owner verified_name */
+  verified_name?: string | null;
+
+  /** Owner verified_phone */
+  verified_phone?: string | null;
+}
+/** Properties of a PaymentMethodDetails. */
+export interface IPaymentMethodDetails {
+  /** Payment Method type (e.g. "card_present") */
+  type?: string | null;
+
+  /** PaymentMethodDetails card_present */
+  card_present?: ICardPresent | null;
+
+  /** PaymentMethodDetails interac_present */
+  interac_present?: ICardPresent | null;
+}
+/** Properties of a Refund. */
+interface IRefund {
+  /** Refund id */
+  id?: string | null;
+
+  /** Refund amount */
+  amount?: number | null;
+
+  /** Refund charge */
+  charge?: string | null;
+
+  /** Time at which the Refund object was created. Measured in seconds since the Unix epoch */
+  created?: number | null;
+
+  /** Three-letter ISO currency code, in lowercase. Must be a supported currency */
+  currency?: string | null;
+
+  /** Meta data in JSON format */
+  metadata?: {[k: string]: string} | null;
+
+  /** Reason for refund */
+  reason?: string | null;
+
+  /** Status of refund */
+  status?: string | null;
+
+  /** Actual details of the payment method */
+  payment_method_details?: IPaymentMethodDetails | null;
+
+  /** If the refund failed, the reason for refund failure if known. */
+  failure_reason?: string | null;
+}
+/** Properties of a Refunds. */
+interface IRefunds {
+  /** Refunds data */
+  data?: IRefund[] | null;
+
+  /** Refunds has_more */
+  has_more?: boolean | null;
+
+  /** Refunds total_count */
+  total_count?: number | null;
+}
+/** Properties of a Charge. */
+interface ICharge {
+  /** ID for charge */
+  id?: string | null;
+
+  /** Amount that is associated with the charge */
+  amount?: number | null;
+
+  /** Amount that is associated with a refund of the charge */
+  amount_refunded?: number | null;
+
+  /** Whether this charge has been captured */
+  captured?: boolean | null;
+
+  /** Whether this charge has been refunded */
+  refunded?: boolean | null;
+
+  /** Time at which the Charge object was created. Measured in seconds since the Unix epoch */
+  created?: number | null;
+
+  /** Three-letter ISO currency code, in lowercase. Must be a supported currency. */
+  currency?: string | null;
+
+  /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  description?: string | null;
+
+  /** An arbitrary string to be displayed on your customer's credit card statement. */
+  statement_descriptor?: string | null;
+
+  /** Email address that the receipt for the resulting payment will be sent to. */
+  receipt_email?: string | null;
+
+  /** Failure code if the charge was declined */
+  failure_code?: string | null;
+
+  /** Message associated with the failure code */
+  failure_message?: string | null;
+
+  /** Whether this charge was made in live mode or not */
+  livemode?: boolean | null;
+
+  /** Meta data in JSON format */
+  metadata?: {[k: string]: string} | null;
+
+  /** Source associated with the charge */
+  source?: ISource | null;
+
+  /** Payment intent ID associated with the charge */
+  payment_intent?: string | null;
+
+  /** Status of the charge */
+  status?: string | null;
+
+  /** Payment method ID */
+  payment_method?: string | null;
+
+  /** Actual details of the payment method */
+  payment_method_details?: IPaymentMethodDetails | null;
+
+  /** Whether the charge was paid */
+  paid?: boolean | null;
+
+  /** Receipt URL */
+  receipt_url?: string | null;
+
+  /** Refunds associated with charge */
+  refunds?: IRefunds | null;
+}
+/** Properties of a Charges. */
+interface ICharges {
+  /** Charges data */
+  data?: ICharge[] | null;
+
+  /** Charges has_more */
+  has_more?: boolean | null;
+
+  /** Charges total_count */
+  total_count?: number | null;
+}
+/** Properties of a CardPresent. */
+interface ICardPresent {
+  /** The last four digits of the card. */
+  last4?: string | null;
+
+  /** Card brand */
+  brand?: string | null;
+
+  /** Customer's signature if signed */
+  evidence_customer_signature?: string | null;
+
+  /** Method used by POS to read the card */
+  read_method?: string | null;
+
+  /** The EMV authorization response payload */
+  emv_auth_data?: string | null;
+
+  /** The EMV authorization response code */
+  authorization_response_code?: string | null;
+
+  /** AID */
+  dedicated_file_name?: string | null;
+
+  /** AID name */
+  application_preferred_name?: string | null;
+
+  /** TVR */
+  terminal_verification_results?: string | null;
+
+  /** TSI */
+  transaction_status_information?: string | null;
+
+  /** CVM type */
+  cvm_type?: string | null;
+
+  /** CardPresent reader */
+  reader?: string | null;
+
+  /** CardPresent fingerprint */
+  fingerprint?: string | null;
+
+  /** CardPresent authorization_code */
+  authorization_code?: string | null;
+}
+/** Properties of a Source. */
+export interface ISource {
+  /** Unique identifier for the source card object. */
+  id?: string | null;
+
+  /** Source type (e.g. "card_present") */
+  type?: string | null;
+
+  /** Card payment method */
+  card_present?: ICardPresent | null;
+
+  /** Interac version of card present */
+  interac_present?: ICardPresent | null;
+
+  /** Meta data in JSON format */
+  metadata?: {[k: string]: string} | null;
+
+  /** Owner data */
+  owner?: IOwner | null;
+}
+export interface IPaymentIntent {
+  /** Unique identifier for the Payment Intent object */
+  id?: string | null;
+
+  /** Time at which the Payment Intent object was created. Measured in seconds since the Unix epoch */
+  created?: number | null;
+
+  /** Status of this PaymentIntent */
+  status?: string | null;
+
+  /** Amount intended to be collected by this Payment Intent */
+  amount?: number | null;
+
+  /** Three-letter ISO currency code, in lowercase. Must be a supported currency. */
+  currency?: string | null;
+
+  /** Card present payment source field map */
+  source?: ISource | null;
+
+  /** An arbitrary string to be displayed on your customer's credit card statement. */
+  statement_descriptor?: string | null;
+
+  /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  description?: string | null;
+
+  /** Email address that the receipt for the resulting payment will be sent to. */
+  receipt_email?: string | null;
+
+  /** Whether this charge was made in live mode or not */
+  livemode?: boolean | null;
+
+  /** Last payment error on a charge (if retrieved) */
+  last_payment_error?: IErrorResponse | null;
+
+  /** Meta data in JSON format */
+  metadata?: {[k: string]: string} | null;
+
+  /** Charges associated with the payment intent */
+  charges?: ICharges | null;
+
+  /** ID for payment method */
+  payment_method?: string | null;
+}
+
+/** Properties of an ActivateTerminalRequest. */
+export interface IActivateTerminalRequest {
+  /** An activation token obtained from Stripe that can be used to activate the reader */
+  pos_activation_token?: string | null;
+
+  /** The fingerprint for the POS authenticating to rabbit */
+  pos_device_id?: string | null;
+
+  /** The terminal hardware information */
+  pos_hardware_info?: any | null;
+
+  /** The terminal software information */
+  pos_software_info?: any | null;
+
+  /** Provide RPC error if reader is currently in use */
+  fail_if_in_use?: boolean | null;
+
+  /** The logical identity of terminal (i.e. lane number) authenticating to rabbit. */
+  terminal_id?: string | null;
+
+  /** ActivateTerminalRequest terminal_ip */
+  terminal_ip?: string | null;
+
+  /** The store name associated with the POS */
+  store_name?: string | null;
+
+  /** The store address associated with the POS */
+  store_address?: any | null;
+}
+
+/** Properties of a SetReaderDisplayRequest. */
+export interface ISetReaderDisplayRequest {
+  /** SetReaderDisplayRequest type */
+  type?: string | null;
+
+  /** SetReaderDisplayRequest cart */
+  cart?: ICart | null;
+}
+
+interface ICart {
+  /** All line items in the basket */
+  line_items?: ILineItem[] | null;
+
+  /** Modifiers that have been applied to the basket. */
+  modifiers?: IModifier[] | null;
+
+  /** Any discounts that have been added to the basket. */
+  discounts?: IDiscount[] | null;
+
+  /** Tenders that have been charged/refunded */
+  tenders?: ITender[] | null;
+
+  /** Total amount of tax */
+  tax?: number | null;
+
+  /** Total balance of cart due */
+  total?: number | null;
+
+  /** The currency of the basket (i.e. USD or AUD). */
+  currency?: string | null;
+}
+
+/** Properties of a LineItem. */
+interface ILineItem {
+  /** LineItem quantity */
+  quantity?: number | null;
+
+  /** A detailed description of the item. */
+  description?: string | null;
+
+  /** This is equal to extended_price - discount + modifiers */
+  amount?: number | null;
+
+  /** The discounts that have been applied to this line item. */
+  discounts?: IDiscount[] | null;
+
+  /** The modifiers that have been applied to this line item. */
+  modifiers?: IModifier[] | null;
+}
+
+interface IModifier {
+  /** A detailed description of discount. */
+  description?: string | null;
+
+  /** Amount in cents of the modification. */
+  amount?: number | null;
+}
+/** Properties of a Discount. */
+interface IDiscount {
+  /** A detailed description of discount. */
+  description?: string | null;
+
+  /** The amount and mechanism of the discount */
+  amount?: number | null;
+}
+/** Properties of a Tender. */
+interface ITender {
+  /** A detailed description of tender. */
+  description?: string | null;
+
+  /** Amount in cents of the tender. */
+  amount?: number | null;
+}

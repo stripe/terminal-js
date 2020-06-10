@@ -1,7 +1,6 @@
-import {TerminalProps} from './terminal-js/rabbit/terminal-props';
-import {Terminal} from './terminal-js/index';
+import {Terminal, TerminalProps} from './terminal';
 
-export * from './terminal-js/index';
+export * from './terminal';
 
 export interface StripeTerminal {
   create(props: TerminalProps): Terminal;
