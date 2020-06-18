@@ -1,9 +1,16 @@
-import {Terminal, TerminalProps} from './terminal';
+import {
+  Terminal,
+  TerminalProps,
+  PaymentStatus,
+  ConnectionStatus,
+} from './terminal';
 
 export * from './terminal';
 
 export interface StripeTerminal {
   create(props: TerminalProps): Terminal;
+  PaymentStatus: PaymentStatus;
+  ConnectionStatus: ConnectionStatus;
 }
 
 export const loadStripeTerminal: () => Promise<StripeTerminal | null>;

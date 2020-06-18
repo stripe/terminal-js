@@ -18,6 +18,19 @@ export {
   ITipConfiguration,
 };
 
+export enum PaymentStatus {
+  NOT_READY = 'not_ready',
+  READY = 'ready',
+  WAITING_FOR_INPUT = 'waiting_for_input',
+  PROCESSING = 'processing',
+}
+
+export enum ConnectionStatus {
+  CONNECTING = 'connecting',
+  CONNECTED = 'connected',
+  NOT_CONNECTED = 'not_connected',
+}
+
 export declare type ConnectionToken = string;
 export declare type FetchConnectionTokenFn = () => Promise<ConnectionToken>;
 
@@ -51,15 +64,6 @@ export interface TerminalOptions {
 export declare type TerminalProps = TerminalOptions & TerminalCallbacks;
 
 export declare type PaymentIntentClientSecret = string;
-export declare type PaymentStatus =
-  | 'not_ready'
-  | 'ready'
-  | 'waiting_for_input'
-  | 'processing';
-export declare type ConnectionStatus =
-  | 'connecting'
-  | 'connected'
-  | 'not_connected';
 
 // eslint-disable-next-line
 export interface ISdkManagedPaymentIntent extends IPaymentIntent {
