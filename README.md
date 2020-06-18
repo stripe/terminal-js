@@ -64,13 +64,6 @@ Note that we may release new [minor and patch](https://semver.org/) versions of
 `@stripe/terminal-js` with small but backwards-incompatible fixes to the type
 declarations. These changes will not affect the Terminal JS SDK itself.
 
-## A note on enum behavior
-
-Due to the fact that only types and not runtime is directly exported by the lib,
-enums exported by `@stripe/terminal-js` will unfortunately export as
-`undefined`. However, these enums are still available on the `StripeTerminal`
-placed on `window` (i.e. `window.StripeTerminal.PaymentStatus.READY`).
-
 ## Ensuring the Terminal JS SDK is available everywhere
 
 By default, this module will insert a `<script>` tag that loads the Terminal JS
