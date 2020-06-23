@@ -3,19 +3,23 @@ import {
   IErrorResponse,
   IPaymentIntent,
   IPaymentMethod,
+  IPaymentMethodReadReusableResponse,
   IRefundChargeRequest,
   ISetReaderDisplayRequest,
   ITipConfiguration,
+  IRefund,
 } from './proto';
 
 export {
   IActivateTerminalRequest,
   IErrorResponse,
   IPaymentIntent,
+  IPaymentMethodReadReusableResponse,
   IPaymentMethod,
   IRefundChargeRequest,
   ISetReaderDisplayRequest,
   ITipConfiguration,
+  IRefund,
 };
 
 export enum PaymentStatus {
@@ -211,7 +215,7 @@ export class Terminal {
   }): Promise<
     | ErrorResponse
     | {
-        payment_method: any;
+        payment_method: IPaymentMethodReadReusableResponse;
       }
   >;
   collectRefundPaymentMethod(
@@ -224,7 +228,7 @@ export class Terminal {
     | ErrorResponse
     | ErrorResponse
     | {
-        refund: any;
+        refund: IRefund;
       }
   >;
   cancelCollectRefundPaymentMethod(): Promise<ErrorResponse | {}>;
