@@ -131,6 +131,46 @@ export interface IPaymentMethod {
   /** Tip selection chosen by the cardholder */
   tip_selection?: ITipSelection | null;
 }
+
+/** Properties of a PaymentMethod. */
+export interface IPaymentMethodReadReusableResponse {
+  /** Unique identifier for the Payment Method object */
+  id?: string | null;
+
+  /** Time at which the Payment Method object was created. Measured in seconds since the Unix epoch */
+  created?: number | null;
+
+  /** Customer ID */
+  customer?: string | null;
+
+  /** Whether this charge was made in live mode or not */
+  livemode?: boolean | null;
+
+  /** Meta data in JSON format */
+  metadata?: {[k: string]: string} | null;
+
+  /** PaymentMethod type */
+  type?: string | null;
+
+  /** Card representation of payment method */
+  card?: ICardPaymentMethodReadReusableResponse | null;
+}
+
+/** Properties of a CardPaymentMethod. */
+interface ICardPaymentMethodReadReusableResponse {
+  /** Masked card data */
+  masked_pan?: string | null;
+
+  /** The card expiration date */
+  expiration_date?: string | null;
+
+  /** Brand of credit card tender, determined by BIN table lookup */
+  card_brand?: CreditCardBrand | null;
+
+  /** Entry method of payment */
+  card_entry_method?: CardEntryMethod | null;
+}
+
 /** Properties of an ErrorResponse. */
 export interface IErrorResponse {
   /** The type of error returned. */
