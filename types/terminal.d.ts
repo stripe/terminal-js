@@ -100,6 +100,8 @@ export declare type ExposedError = {
 
 export interface SimulatorConfiguration {
   paymentMethodType?: 'interac_present' | null;
+  testPaymentMethod?: string | null;
+  testCardNumber?: string | null;
 }
 
 export interface Reader {
