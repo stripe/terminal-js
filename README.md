@@ -5,7 +5,8 @@ module.
 
 **Note**: This package dynamically loads the Stripe Terminal SDK from
 `https://js.stripe.com` and wraps the SDK's global`StripeTerminal` function. To
-be [PCI compliant](https://stripe.com/docs/security#validating-pci-compliance),
+be
+[PCI compliant](https://stripe.com/docs/security/guide#validating-pci-compliance),
 you must load the SDK directly from `https://js.stripe.com` by using this
 library. You cannot include the dynamically loaded code in a bundle or host it
 yourself.
