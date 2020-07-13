@@ -17,7 +17,8 @@ EOF
 }
 
 create_github_release() {
-  if which hub | grep -q "not found"; then
+  if ! command -v hub &> /dev/null
+  then
     create_github_release_fallback
     return
   fi
