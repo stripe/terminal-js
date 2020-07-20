@@ -35,13 +35,14 @@ export enum ConnectionStatus {
   NOT_CONNECTED = 'not_connected',
 }
 
-export declare type ConnectionToken = string;
-export declare type FetchConnectionTokenFn = () => Promise<ConnectionToken>;
-
-export declare enum OutputLogLevel {
+export enum OutputLogLevel {
   NONE = 'none',
   VERBOSE = 'verbose',
 }
+
+export declare type ConnectionToken = string;
+export declare type FetchConnectionTokenFn = () => Promise<ConnectionToken>;
+
 export interface StatusEvent<T extends string> {
   status: T;
 }

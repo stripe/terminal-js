@@ -3,6 +3,7 @@ import {
   TerminalProps,
   PaymentStatus,
   ConnectionStatus,
+  OutputLogLevel,
 } from './terminal';
 
 export * from './terminal';
@@ -11,6 +12,7 @@ export interface StripeTerminal {
   create(props: TerminalProps): Terminal;
   PaymentStatus: PaymentStatus;
   ConnectionStatus: ConnectionStatus;
+  OutputLogLevel: OutputLogLevel;
 }
 
 export const loadStripeTerminal: () => Promise<StripeTerminal | null>;
