@@ -3,6 +3,7 @@ import {
   IActivateTerminalRequest,
   IErrorResponse,
   IPaymentIntent,
+  ISetupIntent,
   IPaymentMethod,
   IPaymentMethodReadReusableResponse,
   IRefundChargeRequest,
@@ -249,6 +250,18 @@ export class Terminal {
         payment_method: IPaymentMethodReadReusableResponse;
       }
   >;
+
+  collectSetupIntentPaymentMethod(
+    clientSecret: string
+  ): Promise<ErrorResponse | {setupIntent: ISetupIntent}>;
+
+  cancelCollectSetupIntentPaymentMethod(): Promise<ErrorResponse | {}>;
+
+  confirmSetupIntent(
+    setupIntent: ISetupIntent,
+    customerMandateCollected: boolean
+  ): Promise<ErrorResponse | {setupIntent: ISetupIntent}>;
+
   collectRefundPaymentMethod(
     charge_id: string,
     amount: number,
