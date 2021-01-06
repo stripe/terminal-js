@@ -173,7 +173,7 @@ export class Terminal {
    */
   clearCachedCredentials(): Promise<{} | ErrorResponse>;
   /**
-   * Ends the Checkout Flow. This brings teh UX back to the splash screen.
+   * Ends the Checkout Flow. This brings the UX back to the splash screen.
    */
   clearReaderDisplay(): Promise<{} | ErrorResponse>;
   /**
