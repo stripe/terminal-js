@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/interface-name-prefix: 0 */
 import {
   IActivateTerminalRequest,
   IErrorResponse,
@@ -70,7 +71,6 @@ export declare type TerminalProps = TerminalOptions & TerminalCallbacks;
 
 export declare type PaymentIntentClientSecret = string;
 
-// eslint-disable-next-line
 export interface ISdkManagedPaymentIntent extends IPaymentIntent {
   sdk_payment_details: IPaymentMethod;
 }
@@ -131,6 +131,29 @@ export declare type DiscoveryConfig = InternetMethodConfiguration;
 export declare type DiscoverResult = {
   discoveredReaders: Array<Reader>;
 };
+
+export interface Address {
+  city?: string | null;
+  state?: string | null;
+  postal_code?: string | null;
+  country?: string | null;
+  line2?: string | null;
+}
+
+export interface Location {
+  id?: string | null;
+  display_name?: string | null;
+  address?: Address | null;
+  timezone?: string | null;
+  release_config_id?: string | null;
+  pinpad_config_id?: string | null;
+  is_default?: boolean | null;
+  is_livemode?: boolean | null;
+  livemode?: boolean | null;
+  deleted?: boolean | null;
+  merchant?: string | null;
+  metadata?: {[k: string]: string} | null;
+}
 
 export class Terminal {
   /**
