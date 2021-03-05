@@ -106,15 +106,17 @@ export interface SimulatorConfiguration {
 }
 
 export interface Reader {
-  id: string;
-  object: string;
-  device_type: string;
-  ip_address: string;
-  label?: string;
-  serial_number: string;
-  status?: 'offline' | 'online';
-  location?: string;
-  base_url?: string;
+  id?: string | null;
+  object?: string | null;
+  device_sw_version?: string | null;
+  device_type?: string | null;
+  ip_address?: string | null;
+  label?: string | null;
+  location?: string | null;
+  serial_number?: string | null;
+  status?: string | null;
+  livemode?: boolean | null;
+  base_url?: string | null;
 }
 
 export interface DiscoveryMethodConfiguration {
