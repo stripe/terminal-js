@@ -133,6 +133,7 @@ export declare type DiscoverResult = {
 };
 
 export interface Address {
+  line1?: string | null;
   city?: string | null;
   state?: string | null;
   postal_code?: string | null;
