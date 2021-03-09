@@ -105,18 +105,25 @@ export interface SimulatorConfiguration {
   testCardNumber?: string | null;
 }
 
+type DeviceType = 'bbpos_wisepos_e' | 'verifone_P400';
+
 export interface Reader {
-  id?: string | null;
-  object?: string | null;
-  device_sw_version?: string | null;
-  device_type?: string | null;
-  ip_address?: string | null;
-  label?: string | null;
-  location?: string | null;
-  serial_number?: string | null;
-  status?: string | null;
-  livemode?: boolean | null;
-  base_url?: string | null;
+  id: string;
+  object: 'terminal.reader';
+  deleted?: void;
+  device_sw_version: string | null;
+  device_type: DeviceType;
+  ip_address: string | null;
+  label: string;
+  livemode: boolean;
+  location: string | null;
+  metadata: Metadata;
+  serial_number: string;
+  status: string | null;
+}
+
+interface Metadata {
+  [name: string]: string;
 }
 
 export interface DiscoveryMethodConfiguration {
@@ -135,27 +142,22 @@ export declare type DiscoverResult = {
 };
 
 export interface Address {
-  line1?: string | null;
-  city?: string | null;
-  state?: string | null;
-  postal_code?: string | null;
-  country?: string | null;
-  line2?: string | null;
+  city: string | null;
+  country: string | null;
+  line1: string | null;
+  line2: string | null;
+  postal_code: string | null;
+  state: string | null;
 }
 
 export interface Location {
-  id?: string | null;
-  display_name?: string | null;
-  address?: Address | null;
-  timezone?: string | null;
-  release_config_id?: string | null;
-  pinpad_config_id?: string | null;
-  is_default?: boolean | null;
-  is_livemode?: boolean | null;
-  livemode?: boolean | null;
-  deleted?: boolean | null;
-  merchant?: string | null;
-  metadata?: {[k: string]: string} | null;
+  id: string;
+  object: 'terminal.location';
+  address: Address;
+  deleted?: void;
+  display_name: string;
+  livemode: boolean;
+  metadata: Metadata;
 }
 
 export class Terminal {
