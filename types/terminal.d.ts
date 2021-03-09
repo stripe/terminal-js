@@ -106,17 +106,24 @@ export interface SimulatorConfiguration {
 }
 
 export interface Reader {
-  id?: string | null;
-  object?: string | null;
-  device_sw_version?: string | null;
-  device_type?: string | null;
-  ip_address?: string | null;
-  label?: string | null;
-  location?: string | null;
-  serial_number?: string | null;
-  status?: string | null;
-  livemode?: boolean | null;
-  base_url?: string | null;
+  id: string;
+  object: 'terminal.reader';
+  deleted?: void;
+  device_sw_version: string | null;
+  device_type: DeviceType;
+  ip_address: string | null;
+  label: string;
+  livemode: boolean;
+  location: string | null;
+  metadata: Metadata;
+  serial_number: string;
+  status: string | null;
+}
+
+type DeviceType = 'bbpos_chipper2x' | 'verifone_P400';
+
+interface Metadata {
+  [name: string]: string;
 }
 
 export interface DiscoveryMethodConfiguration {
