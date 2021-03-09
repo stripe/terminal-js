@@ -36,10 +36,16 @@ const main = async () => {
   const reader: {reader: Reader} | ErrorResponse = await terminal.connectReader(
     {
       id: 'id',
-      object: 'object',
-      device_type: 'type',
+      object: 'terminal.reader',
+      device_type: 'verifone_P400',
       ip_address: 'address',
       serial_number: 'serial',
+      livemode: false,
+      device_sw_version: '0.0.0',
+      label: 'foo',
+      location: null,
+      metadata: {},
+      status: 'online',
     }
   );
 

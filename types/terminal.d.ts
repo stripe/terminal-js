@@ -105,6 +105,8 @@ export interface SimulatorConfiguration {
   testCardNumber?: string | null;
 }
 
+type DeviceType = 'bbpos_chipper2x' | 'verifone_P400';
+
 export interface Reader {
   id: string;
   object: 'terminal.reader';
@@ -119,8 +121,6 @@ export interface Reader {
   serial_number: string;
   status: string | null;
 }
-
-type DeviceType = 'bbpos_chipper2x' | 'verifone_P400';
 
 interface Metadata {
   [name: string]: string;
