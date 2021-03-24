@@ -505,7 +505,7 @@ export interface ISetupIntent {
   created?: (number|null);
 
   /** The most recent SetupAttempt for this SetupIntent. */
-  latest_attempt?: (string|null);
+  latest_attempt?: (ISetupAttempt|null);
 
   /** Has the value true if the object exists in live mode or the value false if the object exists in test mode. */
   livemode?: (boolean|null);
@@ -524,6 +524,77 @@ export interface ISetupIntent {
 
   /** Payment-method-specific configuration for this SetupIntent. */
   payment_method_options?: (IPaymentMethodOptions|null);
+}
+
+/** Properties of a SetupAttempt. */
+export interface ISetupAttempt {
+
+  /** Unique identifier for the object. */
+  id?: (string|null);
+
+  /** String representing the object’s type: "setup_attempt" */
+  object?: (string|null);
+
+  /** ID of the Connect application that created the SetupIntent. */
+  application?: (string|null);
+
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  created?: (number|null);
+
+  /** ID of the Customer this SetupIntent belongs to, if one exists. */
+  customer?: (string|null);
+
+  /** Has the value true if the object exists in live mode or the value false if the object exists in test mode. */
+  livemode?: (boolean|null);
+
+  /** The account (if any) for which the setup is intended. */
+  on_behalf_of?: (string|null);
+
+  /** ID of the payment method used with this SetupAttempt. */
+  payment_method?: (string|null);
+
+  /** Details about the payment method at the time of SetupIntent confirmation. */
+  payment_method_details?: (IPaymentMethodDetails|null);
+
+  /** The error encountered during this attempt to confirm the SetupIntent, if any. */
+  setup_error?: (ISetupError|null);
+
+  /** ID of the SetupIntent that this attempt belongs to. */
+  setup_intent?: (string|null);
+
+  /** Status of this SetupAttempt, one of requires_confirmation, requires_action, processing, succeeded, failed, or abandoned. */
+  status?: (string|null);
+
+  /** The value of usage on the SetupIntent at the time of this confirmation, one of off_session or on_session. */
+  usage?: (string|null);
+}
+
+/** Properties of a SetupError. */
+export interface ISetupError {
+
+  /** For some errors that could be handled programmatically, a short string indicating the error code reported. */
+  code?: (string|null);
+
+  /** For card errors resulting from a card issuer decline, a short string indicating the card issuer’s reason for the decline if they provide one. */
+  decline_code?: (string|null);
+
+  /** A URL to more information about the error code reported. */
+  doc_url?: (string|null);
+
+  /** A human-readable message providing more details about the error. For card errors, these messages can be shown to your users. */
+  message?: (string|null);
+
+  /** If the error is parameter-specific, the parameter related to the error. For example, you can use this to display a message near the correct form field. */
+  param?: (string|null);
+
+  /** The PaymentMethod object for errors returned on a request involving a PaymentMethod. */
+  payment_method?: (IPaymentMethod|null);
+
+  /** If the error is specific to the type of payment method, the payment method type that had a problem. This field is only populated for invoice-related errors. */
+  payment_method_type?: (string|null);
+
+  /** The type of error returned. One of api_connection_error, api_error, authentication_error, card_error, idempotency_error, invalid_request_error, or rate_limit_error */
+  type?: (string|null);
 }
 
 /** Properties of an ActivateTerminalRequest. */
