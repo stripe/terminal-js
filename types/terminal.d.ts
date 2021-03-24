@@ -251,15 +251,29 @@ export class Terminal {
       }
   >;
 
+  /**
+   * Requests the Terminal object to collect a card source from the reader that
+   * can be saved via a SetupIntent.
+   * @param clientSecret Request object containing the setup intent secret of the intent to attach The
+   * @param customerConsentCollected boolean indicating whether or not customer consent to save their card was collected
+   * source to.
+   */
   collectSetupIntentPaymentMethod(
-    clientSecret: string
+    clientSecret: string,
+    customerConsentCollected: boolean
   ): Promise<ErrorResponse | {setupIntent: ISetupIntent}>;
 
+  /**
+   * Cancels an in-flight request made by collectSetupIntentPaymentMethod to collect a payment method for future use
+   */
   cancelCollectSetupIntentPaymentMethod(): Promise<ErrorResponse | {}>;
 
+  /**
+   * Confirms the setup intent which causes the card to be saved for future use.
+   * @param setupIntent The SetupIntent object to confirm; use the value returned from collectSetupIntentPaymentMethod
+   */
   confirmSetupIntent(
-    setupIntent: ISetupIntent,
-    customerMandateCollected: boolean
+    setupIntent: ISetupIntent
   ): Promise<ErrorResponse | {setupIntent: ISetupIntent}>;
 
   collectRefundPaymentMethod(
