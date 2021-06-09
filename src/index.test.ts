@@ -143,7 +143,7 @@ describe('Stripe module loader', () => {
       dispatchScriptEvent('error');
 
       // Turn the task loop to make sure the internal promise handler has been invoked
-      await new Promise((resolve) => setImmediate(resolve));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       expect(console.warn).toHaveBeenCalledWith(
         new Error('Failed to load StripeTerminal')

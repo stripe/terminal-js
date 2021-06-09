@@ -7,6 +7,7 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
+  testEnvironment: 'jsdom',
   globals: {
     // Suppress noise about enabling `esModuleInterop`
     'ts-jest': {diagnostics: {ignoreCodes: [151001]}},
