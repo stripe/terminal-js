@@ -4,8 +4,8 @@ here that you believe represent bugs with the loader, not the SDK itself.
 
 If you're having general trouble with the Terminal JS SDK or your Stripe integration,
 please reach out to us using the form at https://support.stripe.com/email or
-come chat with us at #stripe on freenode. We're very proud of our level of
-service, and we're more than happy to help you out with your integration.
+come chat live with our developers on https://stripe.com/go/developer-chat.
+We're very proud of our level of service, and we're more than happy to help you out with your integration.
 -->
 
 ### Summary
