@@ -1,0 +1,12 @@
+# This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7.0
+workflows:
+  test_my_app:
+    jobs:
+      - node/test:
+          run-command: ci
+          pkg-manager: yarn
+          version: lts
