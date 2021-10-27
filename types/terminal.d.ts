@@ -41,10 +41,15 @@ export enum OutputLogLevel {
   VERBOSE = 'verbose',
 }
 
-export declare type ISetReaderDisplayResponse = {};
-
 export declare type ConnectionToken = string;
 export declare type FetchConnectionTokenFn = () => Promise<ConnectionToken>;
+
+export declare type ISetReaderDisplayResponse = {};
+export declare type ICancelResponse = {};
+export declare type IClearCachedCredentialsResponse = {};
+export declare type IClearReaderDisplayResponse = {};
+export declare type ICollectRefundPaymentMethodResponse = {};
+export declare type IDisconnectResponse = {};
 
 export interface StatusEvent<T extends string> {
   status: T;
@@ -168,15 +173,17 @@ export class Terminal {
    * Disconnects from any connected Readers and triggers reconnecting based on
    * the options in the passed in config.
    */
-  disconnectReader(): Promise<{}>;
+  disconnectReader(): Promise<IDisconnectResponse>;
   /**
    * Clears the cached connection token or rabbit sessions
    */
-  clearCachedCredentials(): Promise<{} | ErrorResponse>;
+  clearCachedCredentials(): Promise<
+    IClearCachedCredentialsResponse | ErrorResponse
+  >;
   /**
    * Ends the Checkout Flow. This brings the UX back to the splash screen.
    */
-  clearReaderDisplay(): Promise<{} | ErrorResponse>;
+  clearReaderDisplay(): Promise<IClearReaderDisplayResponse | ErrorResponse>;
   /**
    * Updates the PIN Pad UI with information on the basket the user is buying
    * @param request Request object containing information on the basket
@@ -213,7 +220,7 @@ export class Terminal {
         paymentIntent: IPaymentIntent;
       }
   >;
-  cancelCollectPaymentMethod(): Promise<ErrorResponse | {}>;
+  cancelCollectPaymentMethod(): Promise<ErrorResponse | ICancelResponse>;
   readReusableCard(options?: {
     customer?: string;
   }): Promise<
@@ -238,7 +245,9 @@ export class Terminal {
   /**
    * Cancels an in-flight request made by collectSetupIntentPaymentMethod to collect a payment method for future use
    */
-  cancelCollectSetupIntentPaymentMethod(): Promise<ErrorResponse | {}>;
+  cancelCollectSetupIntentPaymentMethod(): Promise<
+    ErrorResponse | ICancelResponse
+  >;
 
   /**
    * Confirms the setup intent which causes the card to be saved for future use.
@@ -253,7 +262,8 @@ export class Terminal {
     amount: number,
     currency: string,
     options?: RefundOptions
-  ): Promise<ErrorResponse | {}>;
+  ): Promise<ErrorResponse | ICollectRefundPaymentMethodResponse>;
+
   processRefund(): Promise<
     | ErrorResponse
     | ErrorResponse
@@ -261,8 +271,9 @@ export class Terminal {
         refund: IRefund;
       }
   >;
-  cancelCollectRefundPaymentMethod(): Promise<ErrorResponse | {}>;
-  cancelReadReusableCard(): Promise<ErrorResponse | {}>;
+
+  cancelCollectRefundPaymentMethod(): Promise<ErrorResponse | ICancelResponse>;
+  cancelReadReusableCard(): Promise<ErrorResponse | ICancelResponse>;
   setSimulatorConfiguration(config: any): void;
   getSimulatorConfiguration(): SimulatorConfiguration;
   overrideBaseURL(url: string): void;
