@@ -1,9 +1,9 @@
 /* eslint @typescript-eslint/interface-name-prefix: 0 */
+import Stripe from 'stripe';
+
 import {
   IActivateTerminalRequest,
   IErrorResponse,
-  IPaymentIntent,
-  ISetupIntent,
   IPaymentMethod,
   IPaymentMethodReadReusableResponse,
   IRefundChargeRequest,
@@ -15,7 +15,6 @@ import {
 export {
   IActivateTerminalRequest,
   IErrorResponse,
-  IPaymentIntent,
   IPaymentMethodReadReusableResponse,
   IPaymentMethod,
   IRefundChargeRequest,
@@ -45,6 +44,13 @@ export enum OutputLogLevel {
 export declare type ConnectionToken = string;
 export declare type FetchConnectionTokenFn = () => Promise<ConnectionToken>;
 
+export declare type ISetReaderDisplayResponse = {};
+export declare type ICancelResponse = {};
+export declare type IClearCachedCredentialsResponse = {};
+export declare type IClearReaderDisplayResponse = {};
+export declare type ICollectRefundPaymentMethodResponse = {};
+export declare type IDisconnectResponse = {};
+
 export interface StatusEvent<T extends string> {
   status: T;
 }
@@ -71,6 +77,13 @@ export interface TerminalOptions {
 export declare type TerminalProps = TerminalOptions & TerminalCallbacks;
 
 export declare type PaymentIntentClientSecret = string;
+
+export declare type DeviceType = Stripe.Terminal.Reader.DeviceType;
+
+export declare type Reader = Stripe.Terminal.Reader;
+
+export declare type IPaymentIntent = Stripe.PaymentIntent;
+export declare type ISetupIntent = Stripe.SetupIntent;
 
 export interface ISdkManagedPaymentIntent extends IPaymentIntent {
   sdk_payment_details: IPaymentMethod;
@@ -106,27 +119,6 @@ export interface SimulatorConfiguration {
   testCardNumber?: string | null;
 }
 
-type DeviceType = 'bbpos_wisepos_e' | 'verifone_P400';
-
-export interface Reader {
-  id: string;
-  object: 'terminal.reader';
-  deleted?: void;
-  device_sw_version: string | null;
-  device_type: DeviceType;
-  ip_address: string | null;
-  label: string;
-  livemode: boolean;
-  location: string | null;
-  metadata: Metadata;
-  serial_number: string;
-  status: string | null;
-}
-
-interface Metadata {
-  [name: string]: string;
-}
-
 export interface DiscoveryMethodConfiguration {
   device_type?: string;
   method?: string;
@@ -142,24 +134,9 @@ export declare type DiscoverResult = {
   discoveredReaders: Array<Reader>;
 };
 
-export interface Address {
-  city: string | null;
-  country: string | null;
-  line1: string | null;
-  line2: string | null;
-  postal_code: string | null;
-  state: string | null;
-}
+export type Address = Stripe.Address;
 
-export interface Location {
-  id: string;
-  object: 'terminal.location';
-  address: Address;
-  deleted?: void;
-  display_name: string;
-  livemode: boolean;
-  metadata: Metadata;
-}
+export type Location = Stripe.Terminal.Location;
 
 export class Terminal {
   /**
@@ -196,22 +173,24 @@ export class Terminal {
    * Disconnects from any connected Readers and triggers reconnecting based on
    * the options in the passed in config.
    */
-  disconnectReader(): Promise<{}>;
+  disconnectReader(): Promise<IDisconnectResponse>;
   /**
    * Clears the cached connection token or rabbit sessions
    */
-  clearCachedCredentials(): Promise<{} | ErrorResponse>;
+  clearCachedCredentials(): Promise<
+    IClearCachedCredentialsResponse | ErrorResponse
+  >;
   /**
    * Ends the Checkout Flow. This brings the UX back to the splash screen.
    */
-  clearReaderDisplay(): Promise<{} | ErrorResponse>;
+  clearReaderDisplay(): Promise<IClearReaderDisplayResponse | ErrorResponse>;
   /**
    * Updates the PIN Pad UI with information on the basket the user is buying
    * @param request Request object containing information on the basket
    */
   setReaderDisplay(
     request: ISetReaderDisplayRequest
-  ): Promise<ErrorResponse | {}>;
+  ): Promise<ErrorResponse | ISetReaderDisplayResponse>;
   /**
    * Requests the Terminal object to collect a card source from the reader that
    * can be charged.
@@ -241,7 +220,7 @@ export class Terminal {
         paymentIntent: IPaymentIntent;
       }
   >;
-  cancelCollectPaymentMethod(): Promise<ErrorResponse | {}>;
+  cancelCollectPaymentMethod(): Promise<ErrorResponse | ICancelResponse>;
   readReusableCard(options?: {
     customer?: string;
   }): Promise<
@@ -266,7 +245,9 @@ export class Terminal {
   /**
    * Cancels an in-flight request made by collectSetupIntentPaymentMethod to collect a payment method for future use
    */
-  cancelCollectSetupIntentPaymentMethod(): Promise<ErrorResponse | {}>;
+  cancelCollectSetupIntentPaymentMethod(): Promise<
+    ErrorResponse | ICancelResponse
+  >;
 
   /**
    * Confirms the setup intent which causes the card to be saved for future use.
@@ -281,7 +262,8 @@ export class Terminal {
     amount: number,
     currency: string,
     options?: RefundOptions
-  ): Promise<ErrorResponse | {}>;
+  ): Promise<ErrorResponse | ICollectRefundPaymentMethodResponse>;
+
   processRefund(): Promise<
     | ErrorResponse
     | ErrorResponse
@@ -289,8 +271,9 @@ export class Terminal {
         refund: IRefund;
       }
   >;
-  cancelCollectRefundPaymentMethod(): Promise<ErrorResponse | {}>;
-  cancelReadReusableCard(): Promise<ErrorResponse | {}>;
+
+  cancelCollectRefundPaymentMethod(): Promise<ErrorResponse | ICancelResponse>;
+  cancelReadReusableCard(): Promise<ErrorResponse | ICancelResponse>;
   setSimulatorConfiguration(config: any): void;
   getSimulatorConfiguration(): SimulatorConfiguration;
   overrideBaseURL(url: string): void;
