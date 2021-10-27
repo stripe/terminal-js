@@ -1,9 +1,9 @@
 /* eslint @typescript-eslint/interface-name-prefix: 0 */
+import Stripe from 'stripe';
+
 import {
   IActivateTerminalRequest,
   IErrorResponse,
-  IPaymentIntent,
-  ISetupIntent,
   IPaymentMethod,
   IPaymentMethodReadReusableResponse,
   IRefundChargeRequest,
@@ -15,7 +15,6 @@ import {
 export {
   IActivateTerminalRequest,
   IErrorResponse,
-  IPaymentIntent,
   IPaymentMethodReadReusableResponse,
   IPaymentMethod,
   IRefundChargeRequest,
@@ -72,6 +71,13 @@ export declare type TerminalProps = TerminalOptions & TerminalCallbacks;
 
 export declare type PaymentIntentClientSecret = string;
 
+export type DeviceType = Stripe.Terminal.Reader.DeviceType;
+
+export type Reader = Stripe.Terminal.Reader;
+
+export type IPaymentIntent = Stripe.PaymentIntent;
+export type ISetupIntent = Stripe.SetupIntent;
+
 export interface ISdkManagedPaymentIntent extends IPaymentIntent {
   sdk_payment_details: IPaymentMethod;
 }
@@ -106,27 +112,6 @@ export interface SimulatorConfiguration {
   testCardNumber?: string | null;
 }
 
-type DeviceType = 'bbpos_chipper2x' | 'bbpos_wisepos_e' | 'verifone_P400';
-
-export interface Reader {
-  id: string;
-  object: 'terminal.reader';
-  deleted?: void;
-  device_sw_version: string | null;
-  device_type: DeviceType;
-  ip_address: string | null;
-  label: string;
-  livemode: boolean;
-  location: string | Location | null;
-  metadata: Metadata;
-  serial_number: string;
-  status: string | null;
-}
-
-interface Metadata {
-  [name: string]: string;
-}
-
 export interface DiscoveryMethodConfiguration {
   device_type?: string;
   method?: string;
@@ -142,24 +127,9 @@ export declare type DiscoverResult = {
   discoveredReaders: Array<Reader>;
 };
 
-export interface Address {
-  city: string | null;
-  country: string | null;
-  line1: string | null;
-  line2: string | null;
-  postal_code: string | null;
-  state: string | null;
-}
+export type Address = Stripe.Address;
 
-export interface Location {
-  id: string;
-  object: 'terminal.location';
-  address: Address;
-  deleted?: void;
-  display_name: string;
-  livemode: boolean;
-  metadata: Metadata;
-}
+export type Location = Stripe.Terminal.Location;
 
 export class Terminal {
   /**
