@@ -106,7 +106,7 @@ export interface SimulatorConfiguration {
   testCardNumber?: string | null;
 }
 
-type DeviceType = 'bbpos_wisepos_e' | 'verifone_P400';
+type DeviceType = 'bbpos_chipper2x' | 'bbpos_wisepos_e' | 'verifone_P400';
 
 export interface Reader {
   id: string;
@@ -117,7 +117,7 @@ export interface Reader {
   ip_address: string | null;
   label: string;
   livemode: boolean;
-  location: string | null;
+  location: string | Location | null;
   metadata: Metadata;
   serial_number: string;
   status: string | null;
