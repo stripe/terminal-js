@@ -41,6 +41,8 @@ export enum OutputLogLevel {
   VERBOSE = 'verbose',
 }
 
+export declare type ISetReaderDisplayResponse = {};
+
 export declare type ConnectionToken = string;
 export declare type FetchConnectionTokenFn = () => Promise<ConnectionToken>;
 
@@ -71,12 +73,12 @@ export declare type TerminalProps = TerminalOptions & TerminalCallbacks;
 
 export declare type PaymentIntentClientSecret = string;
 
-export type DeviceType = Stripe.Terminal.Reader.DeviceType;
+export declare type DeviceType = Stripe.Terminal.Reader.DeviceType;
 
-export type Reader = Stripe.Terminal.Reader;
+export declare type Reader = Stripe.Terminal.Reader;
 
-export type IPaymentIntent = Stripe.PaymentIntent;
-export type ISetupIntent = Stripe.SetupIntent;
+export declare type IPaymentIntent = Stripe.PaymentIntent;
+export declare type ISetupIntent = Stripe.SetupIntent;
 
 export interface ISdkManagedPaymentIntent extends IPaymentIntent {
   sdk_payment_details: IPaymentMethod;
@@ -181,7 +183,7 @@ export class Terminal {
    */
   setReaderDisplay(
     request: ISetReaderDisplayRequest
-  ): Promise<ErrorResponse | {}>;
+  ): Promise<ErrorResponse | ISetReaderDisplayResponse>;
   /**
    * Requests the Terminal object to collect a card source from the reader that
    * can be charged.
