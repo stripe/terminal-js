@@ -2,7 +2,7 @@ import {StripeTerminal} from '../types/index';
 
 // `_VERSION` will be rewritten by `@rollup/plugin-replace` as a string literal
 // containing the package.json version
-declare const _VERSION: string;
+// declare const _VERSION: string;
 
 const V1_URL = 'https://js.stripe.com/terminal/v1';
 

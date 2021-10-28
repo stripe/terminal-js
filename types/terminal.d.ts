@@ -1,4 +1,4 @@
-/* eslint @typescript-eslint/interface-name-prefix: 0 */
+/* eslint-disable no-unused-vars */
 import Stripe from 'stripe';
 
 import {
@@ -44,12 +44,12 @@ export enum OutputLogLevel {
 export declare type ConnectionToken = string;
 export declare type FetchConnectionTokenFn = () => Promise<ConnectionToken>;
 
-export declare type ISetReaderDisplayResponse = {};
-export declare type ICancelResponse = {};
-export declare type IClearCachedCredentialsResponse = {};
-export declare type IClearReaderDisplayResponse = {};
-export declare type ICollectRefundPaymentMethodResponse = {};
-export declare type IDisconnectResponse = {};
+export declare type ISetReaderDisplayResponse = Record<string, never>;
+export declare type ICancelResponse = Record<string, never>;
+export declare type IClearCachedCredentialsResponse = Record<string, never>;
+export declare type IClearReaderDisplayResponse = Record<string, never>;
+export declare type ICollectRefundPaymentMethodResponse = Record<string, never>;
+export declare type IDisconnectResponse = Record<string, never>;
 
 export interface StatusEvent<T extends string> {
   status: T;
