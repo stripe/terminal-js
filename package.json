@@ -7,17 +7,17 @@
   "jsnext:main": "dist/terminal.esm.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "test": "jest",
+    "test": "./node_modules/.bin/jest",
     "test:versions": "./tests/versions/scripts/test.sh",
-    "test:types": "tsc -p ./tests/types && jest --roots '<rootDir>/tests/types'",
-    "lint": "eslint '{src,types}/**/*.{ts,js}' && yarn prettier-list-different",
-    "typecheck": "tsc",
+    "test:types": "./node_modules/.bin/tsc -p ./tests/types && ./node_modules/.bin/jest --roots '<rootDir>/tests/types'",
+    "lint": "./node_modules/.bin/eslint '{src,types}/**/*.{ts,js}' && yarn prettier-list-different",
+    "typecheck": "./node_modules/.bin/tsc",
     "build": "yarn clean && yarn rollup -c",
-    "clean": "rimraf dist",
+    "clean": "./node_modules/.bin/rimraf dist",
     "ci": "yarn lint && yarn test && yarn test:versions && yarn test:types && yarn typecheck && yarn build",
     "prepublishOnly": "echo \"\nPlease use ./scripts/publish instead\n\" && exit 1",
-    "prettier": "prettier './**/*.{js,ts,md,html,css}' --write",
-    "prettier-list-different": "prettier './**/*.{js,ts,md,html,css}' --list-different"
+    "prettier": "./node_modules/.bin/prettier './**/*.{js,ts,md,html,css}' --write",
+    "prettier-list-different": "./node_modules/.bin/prettier './**/*.{js,ts,md,html,css}' --list-different"
   },
   "keywords": [
     "Stripe",
