@@ -90,6 +90,12 @@ export interface ISdkManagedPaymentIntent extends IPaymentIntent {
 }
 export type SdkManagedPaymentIntent = ISdkManagedPaymentIntent;
 
+export interface ICollectConfig {
+  // Bypass tipping selection if it would have otherwise been shown.
+  // For more information, see the official Stripe docs: [On Reader Tipping](https://stripe.com/docs/terminal/features/collecting-tips/on-reader)
+  skip_tipping?: boolean | null;
+}
+
 export declare type ConnectOptions = Pick<
   IActivateTerminalRequest,
   'fail_if_in_use'
@@ -201,6 +207,7 @@ export class Terminal {
     request: PaymentIntentClientSecret,
     options?: {
       tip_configuration?: ITipConfiguration;
+      config_override?: ICollectConfig;
     }
   ): Promise<
     | ErrorResponse
