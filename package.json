@@ -1,6 +1,6 @@
 {
   "name": "@stripe/terminal-js",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Stripe Terminal loading utility",
   "main": "dist/terminal.js",
   "module": "dist/terminal.esm.js",
