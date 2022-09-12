@@ -94,6 +94,14 @@ export interface ICollectConfig {
   // Bypass tipping selection if it would have otherwise been shown.
   // For more information, see the official Stripe docs: [On Reader Tipping](https://stripe.com/docs/terminal/features/collecting-tips/on-reader)
   skip_tipping?: boolean | null;
+  tipping?: ITippingConfig | null;
+}
+
+// Contains per-transaction configuration information relevant to collecting tips
+export interface ITippingConfig {
+  // Calculate percentage-based tips based on this amount.
+  // For more information, see the official Stripe docs: [On Reader Tipping](https://stripe.com/docs/terminal/features/collecting-tips/on-reader)
+  eligible_amount?: number | null;
 }
 
 export declare type ConnectOptions = Pick<
