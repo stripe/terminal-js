@@ -95,6 +95,11 @@ export interface ICollectConfig {
   // For more information, see the official Stripe docs: [On Reader Tipping](https://stripe.com/docs/terminal/features/collecting-tips/on-reader)
   skip_tipping?: boolean | null;
   tipping?: ITippingConfig | null;
+  // set to true to return the expanded payment_intent.
+  update_payment_intent?: boolean | null;
+
+  // the ID of the payment intent to return back.
+  payment_intent_id?: string | null;
 }
 
 // Contains per-transaction configuration information relevant to collecting tips
