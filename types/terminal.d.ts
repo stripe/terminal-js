@@ -4,12 +4,13 @@ import Stripe from 'stripe';
 import {
   IActivateTerminalRequest,
   IErrorResponse,
-  IPaymentMethod,
+  IPaymentMethod as SdkIPaymentMethod,
   IPaymentMethodReadReusableResponse,
   IRefundChargeRequest,
   ISetReaderDisplayRequest,
   ITipConfiguration,
   IRefund,
+  IPaymentIntentExpandedMethod,
 } from './proto';
 
 export {
@@ -50,6 +51,10 @@ export declare type IClearCachedCredentialsResponse = Record<string, never>;
 export declare type IClearReaderDisplayResponse = Record<string, never>;
 export declare type ICollectRefundPaymentMethodResponse = Record<string, never>;
 export declare type IDisconnectResponse = Record<string, never>;
+
+interface IPaymentMethod extends SdkIPaymentMethod {
+  payment_intent?: IPaymentIntentExpandedMethod | null;
+}
 
 export interface StatusEvent<T extends string> {
   status: T;
