@@ -132,6 +132,78 @@ export interface IPaymentMethod {
   tip_selection?: ITipSelection | null;
 }
 
+interface IPaymentIntentExpandedMethod {
+
+  /** Unique identifier for the Payment Intent object */
+  id?: (string|null);
+
+  /** Time at which the Payment Intent object was created. Measured in seconds since the Unix epoch */
+  created?: (number|null);
+
+  /** Status of this PaymentIntent */
+  status?: (string|null);
+
+  /** Amount intended to be collected by this Payment Intent */
+  amount?: (number|null);
+
+  /** Three-letter ISO currency code, in lowercase. Must be a supported currency. */
+  currency?: (string|null);
+
+  /** Card present payment source field map */
+  source?: (ISource|null);
+
+  /** An arbitrary string to be displayed on your customer's credit card statement. */
+  statement_descriptor?: (string|null);
+
+  /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  description?: (string|null);
+
+  /** Email address that the receipt for the resulting payment will be sent to. */
+  receipt_email?: (string|null);
+
+  /** Whether this charge was made in live mode or not */
+  livemode?: (boolean|null);
+
+  /** Last payment error on a charge (if retrieved) */
+  last_payment_error?: (IErrorResponse|null);
+
+  /** Meta data in JSON format */
+  metadata?: ({ [k: string]: string }|null);
+
+  /** Charges associated with the payment intent */
+  charges?: (ICharges|null);
+
+  /** ID for payment method */
+  payment_method?: (IPaymentMethodReadReusableResponse|null);
+
+  /** Amount that can be captured */
+  amount_capturable?: (number|null);
+
+  /** Amount that was collected */
+  amount_received?: (number|null);
+
+  /** The amount of the application fee (if any) for the resulting payment */
+  application_fee_amount?: (number|null);
+
+  /** Populated when status is canceled, this is the time at which the PaymentIntent was canceled. */
+  canceled_at?: (number|null);
+
+  /** Controls when the funds will be captured from the customer's account */
+  capture_method?: (Method|null);
+
+  /** The client secret of this PaymentIntent. Used for client-side retrieval using a publishable key. */
+  client_secret?: (string|null);
+
+  /** The confirmation method */
+  confirmation_method?: (Method|null);
+
+  /** The customer of this payment intent */
+  customer?: (string|null);
+
+  /** A string that identifies this intent as part of a group. */
+  transfer_group?: (string|null);
+}
+
 /** Properties of a PaymentMethod. */
 export interface IPaymentMethodReadReusableResponse {
   /** Unique identifier for the Payment Method object */
@@ -758,3 +830,7 @@ interface ICardOptions {
 }
 
 type Request3dSecureType = "automatic"| "any";
+
+/** Method enum. */
+type Method =
+"automatic"| "manual";
