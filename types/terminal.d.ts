@@ -141,6 +141,7 @@ export interface SimulatorConfiguration {
   paymentMethodType?: 'interac_present' | null;
   testPaymentMethod?: string | null;
   testCardNumber?: string | null;
+  tipAmount?: number | null;
 }
 
 export interface DiscoveryMethodConfiguration {
