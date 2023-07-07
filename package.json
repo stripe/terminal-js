@@ -51,7 +51,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.0.4",
     "prettier": "^1.19.1",
-    "protobufjs": "^6.9.0",
+    "protobufjs": "^7.2.4",
     "rimraf": "^2.6.2",
     "rollup": "^1.29.0",
     "rollup-plugin-babel": "^4.3.3",
