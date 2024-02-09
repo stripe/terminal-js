@@ -114,6 +114,11 @@ export interface ITippingConfig {
   eligible_amount?: number | null;
 }
 
+// Contains configuration information relevant to processing/confirming a payment method.
+export interface IProcessConfig {
+  amountSurcharge?: number | null;
+}
+
 export declare type ConnectOptions = Pick<
   IActivateTerminalRequest,
   'fail_if_in_use'
@@ -239,7 +244,10 @@ export class Terminal {
    * @param request Object containing the payment intent to confirm.
    */
   processPayment(
-    request: ISdkManagedPaymentIntent
+    request: ISdkManagedPaymentIntent,
+    options?: {
+      config_override?: IProcessConfig;
+    }
   ): Promise<
     | ErrorResponse
     | {
