@@ -116,7 +116,7 @@ export interface ITippingConfig {
 
 // Contains configuration information relevant to processing/confirming a payment method.
 export interface IProcessConfig {
-  amountSurcharge?: number | null;
+  amount_surcharge?: number | null;
 }
 
 export declare type ConnectOptions = Pick<
