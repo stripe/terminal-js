@@ -105,6 +105,9 @@ export interface ICollectConfig {
 
   // the ID of the payment intent to return back.
   payment_intent_id?: string | null;
+
+  // Optional notice to display on the payment collection screen to inform the customer of a surcharge.
+  surcharge_notice?: string | null;
 }
 
 // Contains per-transaction configuration information relevant to collecting tips
@@ -116,6 +119,7 @@ export interface ITippingConfig {
 
 // Contains configuration information relevant to processing/confirming a payment method.
 export interface IProcessConfig {
+  // Surcharge amount to be applied to the payment.
   amount_surcharge?: number | null;
 }
 
