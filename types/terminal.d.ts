@@ -105,6 +105,9 @@ export interface ICollectConfig {
 
   // the ID of the payment intent to return back.
   payment_intent_id?: string | null;
+
+  // Optional notice to display on the payment collection screen to inform the customer of a surcharge.
+  surcharge_notice?: string | null;
 }
 
 // Contains per-transaction configuration information relevant to collecting tips
@@ -112,6 +115,12 @@ export interface ITippingConfig {
   // Calculate percentage-based tips based on this amount.
   // For more information, see the official Stripe docs: [On Reader Tipping](https://stripe.com/docs/terminal/features/collecting-tips/on-reader)
   eligible_amount?: number | null;
+}
+
+// Contains configuration information relevant to processing/confirming a payment method.
+export interface IProcessConfig {
+  // Surcharge amount to be applied to the payment.
+  amount_surcharge?: number | null;
 }
 
 export declare type ConnectOptions = Pick<
@@ -239,7 +248,10 @@ export class Terminal {
    * @param request Object containing the payment intent to confirm.
    */
   processPayment(
-    request: ISdkManagedPaymentIntent
+    request: ISdkManagedPaymentIntent,
+    options?: {
+      config_override?: IProcessConfig;
+    }
   ): Promise<
     | ErrorResponse
     | {
