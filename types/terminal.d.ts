@@ -172,6 +172,316 @@ export type Address = Stripe.Address;
 
 export type Location = Stripe.Terminal.Location;
 
+// Contains information about the inputs to collect from the reader
+export interface ICollectInputsParameters {
+  inputs: Array<IInput>;
+}
+
+export enum FormType {
+  SELECTION = 'selection',
+  SIGNATURE = 'signature',
+  PHONE = 'phone',
+  EMAIL = 'email',
+  NUMERIC = 'numeric',
+  TEXT = 'text',
+}
+
+// Represents a single input form
+export type IInput =
+  | SelectionInput
+  | SignatureInput
+  | PhoneInput
+  | EmailInput
+  | NumericInput
+  | TextInput;
+
+// Represents the toggle state
+export enum ToggleValue {
+  // Toggle is checked or on
+  ENABLED = 'enabled',
+  // Toggle is unchecked or off
+  DISABLED = 'disabled',
+}
+
+// Contains information for a collect inputs toggle
+export interface IToggle {
+  // Set the main, larger style text.
+  title?: String | null;
+  // Set the secondary, smaller style text.
+  description?: String | null;
+  // Set the initial value to be set for the toggle.
+  defaultValue: ToggleValue;
+}
+
+// Represents the style of a selection form button
+export enum SelectionButtonStyle {
+  // Button will use a highlighted, accent color
+  PRIMARY = 'primary',
+  // Button will use a subdued, secondary color
+  SECONDARY = 'secondary',
+}
+
+// Contains information for a selection form button
+export interface ISelectionButton {
+  // Set the style of a selection button
+  style: SelectionButtonStyle;
+  // Set the button text
+  text: String;
+}
+
+// Contains information about a selection form to display on the reader
+export declare type SelectionInput = {
+  // Set the type of the form
+  formType: FormType;
+
+  // Set whether this form is required
+  required?: boolean | null;
+
+  // Set the title of the form
+  title: String;
+
+  // Set the description of the form
+  description?: String | null;
+
+  // Set the button choices to display on the form
+  selectionButtons: Array<ISelectionButton>;
+
+  // Modify the skip button text
+  skipButtonText?: String | null;
+
+  // Set the toggles to display on the form
+  toggles?: Array<IToggle> | null;
+}
+
+// Contains information about a signature form to display on the reader
+export declare type SignatureInput = {
+  // Set the type of the form
+  formType: FormType;
+
+  // Set whether this form is required
+  required?: boolean | null;
+
+  // Set the title of the form
+  title: String;
+
+  // Set the description of the form
+  description?: String | null;
+
+  // Modify the submit button text
+  submitButtonText?: String | null;
+
+  // Modify the skip button text
+  skipButtonText?: String | null;
+
+  // Set the toggles to display on the form
+  toggles?: Array<IToggle> | null;
+}
+
+// Contains information about a phone form to display on the reader
+export declare type PhoneInput = {
+  // Set the type of the form
+  formType: FormType;
+
+  // Set whether this form is required
+  required?: boolean | null;
+
+  // Set the title of the form
+  title: String;
+
+  // Set the description of the form
+  description?: String | null;
+
+  // Modify the submit button text
+  submitButtonText?: String | null;
+
+  // Modify the skip button text
+  skipButtonText?: String | null;
+
+  // Set the toggles to display on the form
+  toggles?: Array<IToggle> | null;
+}
+
+// Contains information about an email form to display on the reader
+export declare type EmailInput = {
+  // Set the type of the form
+  formType: FormType;
+
+  // Set whether this form is required
+  required?: boolean | null;
+
+  // Set the title of the form
+  title: String;
+
+  // Set the description of the form
+  description?: String | null;
+
+  // Modify the submit button text
+  submitButtonText?: String | null;
+
+  // Modify the skip button text
+  skipButtonText?: String | null;
+
+  // Set the toggles to display on the form
+  toggles?: Array<IToggle> | null;
+}
+
+// Contains information about a text form to display on the reader
+export declare type TextInput = {
+  // Set the type of the form
+  formType: FormType;
+
+  // Set whether this form is required
+  required?: boolean | null;
+
+  //  Set the title of the form
+  title: String;
+
+  // Set the description of the form
+  description?: String | null;
+
+  // Modify the submit button text
+  submitButtonText?: String | null;
+
+  // Modify the skip button text
+  skipButtonText?: String | null;
+
+  // Set the toggles to display on the form
+  toggles?: Array<IToggle> | null;
+}
+
+// Contains information about a numeric form to display on the reader
+export declare type NumericInput = {
+  // Set the type of the form
+  formType: FormType;
+
+  // Set whether this form is required
+  required?: boolean | null;
+
+  // Set the title of the form
+  title: String;
+
+  // Set the description of the form
+  description?: String | null;
+
+  // Modify the submit button text
+  submitButtonText?: String | null;
+
+  // Modify the skip button text
+  skipButtonText?: String | null;
+
+  // Set the toggles to display on the form
+  toggles?: Array<IToggle> | null;
+}
+
+// Contains data collected for a toggle
+export enum ToggleResult {
+  // Toggle is unchecked or off
+  DISABLED = 'disabled',
+  // Toggle is checked or on
+  ENABLED = 'enabled',
+  // Input form is skipped, no value
+  SKIPPED = 'skipped',
+}
+
+// Contains information about the data collected from a given form
+export type ICollectInputsResult =
+  | SelectionResult
+  | SignatureResult
+  | PhoneResult
+  | EmailResult
+  | NumericResult
+  | TextResult;
+
+// Contains data collected from a selection form
+export declare type SelectionResult = {
+  // the type of the form
+  formType: FormType;
+
+  // if true, the skip button was pressed to skip the form.
+  skipped: boolean;
+
+  // selected button. Null if the form was skipped.
+  selection?: String | null;
+
+  // array of toggles and selected value. Values are `ToggleResult.SKIPPED` if form was skipped.
+  toggles: Array<ToggleResult>;
+}
+
+// Contains data collected from a signature form
+export declare type SignatureResult = {
+  // the type of the form
+  formType: FormType;
+
+  // if true, the skip button was pressed to skip the form.
+  skipped: boolean;
+
+  // signature in svg format. Null if the form was skipped.
+  signatureSvg?: String | null;
+
+  // array of toggles and selected value. Values are `ToggleResult.SKIPPED` if form was skipped.
+  toggles: Array<ToggleResult>;
+}
+
+// Contains data collected from a phone form
+export declare type PhoneResult = {
+  // the type of the form
+  formType: FormType;
+
+  // if true, the skip button was pressed to skip the form.
+  skipped: boolean;
+
+  // the submitted phone number in E.164 format. Null if the form was skipped.
+  phone?: String | null;
+
+  // array of toggles and selected value. Values are `ToggleResult.SKIPPED` if form was skipped.
+  toggles: Array<ToggleResult>;
+}
+
+// Contains data collected from an email form
+export declare type EmailResult = {
+  // the type of the form
+  formType: FormType;
+
+  // if true, the skip button was pressed to skip the form.
+  skipped: boolean;
+
+  // the submitted email. Null if the form was skipped.
+  email?: String | null;
+
+  // array of toggles and selected value. Values are `ToggleResult.SKIPPED` if form was skipped.
+  toggles: Array<ToggleResult>;
+}
+
+// Contains data collected from a text form
+export declare type TextResult = {
+  // the type of the form
+  formType: FormType;
+
+  // if true, the skip button was pressed to skip the form.
+  skipped: boolean;
+
+  // the submitted text. Null if the form was skipped.
+  text?: String | null;
+
+  // array of toggles and selected value. Values are `ToggleResult.SKIPPED` if form was skipped.
+  toggles: Array<ToggleResult>;
+}
+
+// Contains data collected from an email form
+export declare type NumericResult = {
+  // the type of the form
+  formType: FormType;
+
+  // if true, the skip button was pressed to skip the form.
+  skipped: boolean;
+
+  // the submitted number as a string. Null if the form was skipped.
+  numericString?: String | null;
+
+  // array of toggles and selected value. Values are `ToggleResult.SKIPPED` if form was skipped.
+  toggles: Array<ToggleResult>;
+}
+
 export class Terminal {
   /**
    * Returns the current connection status of the PIN pad.
@@ -225,6 +535,17 @@ export class Terminal {
   setReaderDisplay(
     request: ISetReaderDisplayRequest
   ): Promise<ErrorResponse | ISetReaderDisplayResponse>;
+  /**
+   * Display forms and collect information from customers. Available for BBPOS WisePOS E and Stripe S700.
+   * @param collectInputsParameters Parameters to configure forms
+   */
+  collectInputs(
+    collectInputsParameters: ICollectInputsParameters
+  ): Promise<ErrorResponse | Array<ICollectInputsResult>>;
+  /**
+   * Cancels an in-flight request made by collectInputs
+   */
+  cancelCollectInputs(): Promise<ErrorResponse | {}>;
   /**
    * Requests the Terminal object to collect a card source from the reader that
    * can be charged.
