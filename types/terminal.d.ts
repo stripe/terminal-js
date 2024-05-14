@@ -172,6 +172,169 @@ export type Address = Stripe.Address;
 
 export type Location = Stripe.Terminal.Location;
 
+// Contains information about the inputs to collect from the reader
+export interface ICollectInputsParameters {
+  inputs: Array<IInput>;
+}
+
+export enum FormType {
+  SELECTION = 'selection',
+  SIGNATURE = 'signature',
+  PHONE = 'phone',
+  EMAIL = 'email',
+  NUMERIC = 'numeric',
+  TEXT = 'text',
+}
+
+// Represents a single input form
+export interface IInput {
+  // Set the type of the form
+  formType: FormType;
+
+  // Set whether this form is required
+  required?: boolean | null;
+
+  // Set the title of the form
+  title: string;
+
+  // Set the description of the form
+  description?: string | null;
+
+  // Set the toggles to display on the form
+  toggles?: IToggle[] | null;
+
+  // Modify the skip button text
+  skipButtonText?: string | null;
+}
+
+// Represents the toggle state
+export enum ToggleValue {
+  // Toggle is checked or on
+  ENABLED = 'enabled',
+  // Toggle is unchecked or off
+  DISABLED = 'disabled',
+}
+
+// Contains information for a collect inputs toggle
+export interface IToggle {
+  // Set the main, larger style text.
+  title?: string | null;
+  // Set the secondary, smaller style text.
+  description?: string | null;
+  // Set the initial value to be set for the toggle.
+  defaultValue: ToggleValue;
+}
+
+// Represents the style of a selection form button
+export enum SelectionButtonStyle {
+  // Button will use a highlighted, accent color
+  PRIMARY = 'primary',
+  // Button will use a subdued, secondary color
+  SECONDARY = 'secondary',
+}
+
+// Contains information for a selection form button
+export interface ISelectionButton {
+  // Set the style of a selection button
+  style: SelectionButtonStyle;
+  // Set the button text
+  text: string;
+}
+
+// Contains information about a selection form to display on the reader
+export interface SelectionInput extends IInput {
+  // Set the button choices to display on the form
+  selectionButtons: ISelectionButton[];
+}
+
+// Contains information about a signature form to display on the reader
+export interface SignatureInput extends IInput {
+  // Modify the submit button text
+  submitButtonText?: string | null;
+}
+
+// Contains information about a phone form to display on the reader
+export interface PhoneInput extends IInput {
+  // Modify the submit button text
+  submitButtonText?: string | null;
+}
+
+// Contains information about an email form to display on the reader
+export interface EmailInput extends IInput {
+  // Modify the submit button text
+  submitButtonText?: string | null;
+}
+
+// Contains information about a text form to display on the reader
+export interface TextInput extends IInput {
+  // Modify the submit button text
+  submitButtonText?: string | null;
+}
+
+// Contains information about a numeric form to display on the reader
+export interface NumericInput extends IInput {
+  // Modify the submit button text
+  submitButtonText?: string | null;
+}
+
+// Contains data collected for a toggle
+export enum ToggleResult {
+  // Toggle is unchecked or off
+  DISABLED = 'disabled',
+  // Toggle is checked or on
+  ENABLED = 'enabled',
+  // Input form is skipped, no value
+  SKIPPED = 'skipped',
+}
+
+// Contains the common fields for all input result types
+export interface ICollectInputsResult {
+  // the type of the form
+  formType: FormType;
+
+  // if true, the skip button was pressed to skip the form.
+  skipped: boolean;
+
+  // array of toggles and selected value. Values are `ToggleResult.SKIPPED` if form was skipped.
+  toggles: ToggleResult[];
+}
+
+// Contains data collected from a selection form
+export interface SelectionResult extends ICollectInputsResult {
+  // selected button. Null if the form was skipped.
+  selection?: string | null;
+}
+
+// Contains data collected from a signature form
+export interface SignatureResult extends ICollectInputsResult {
+  // signature in svg format. Null if the form was skipped.
+  signatureSvg?: string | null;
+}
+
+// Contains data collected from a phone form
+export interface PhoneResult extends ICollectInputsResult {
+  // the submitted phone number in E.164 format. Null if the form was skipped.
+  phone?: string | null;
+}
+
+// Contains data collected from an email form
+export interface EmailResult extends ICollectInputsResult {
+  // the submitted email. Null if the form was skipped.
+  email?: string | null;
+}
+
+// Contains data collected from a text form
+export interface TextResult extends ICollectInputsResult {
+  // the submitted text. Null if the form was skipped.
+  text?: string | null;
+}
+
+// Contains data collected from an email form
+export interface NumericResult extends ICollectInputsResult {
+  // the submitted number as a string. Null if the form was skipped.
+  numericString?: string | null;
+}
+
 export class Terminal {
   /**
    * Returns the current connection status of the PIN pad.
@@ -225,6 +388,17 @@ export class Terminal {
   setReaderDisplay(
     request: ISetReaderDisplayRequest
   ): Promise<ErrorResponse | ISetReaderDisplayResponse>;
+  /**
+   * Display forms and collect information from customers. Available for BBPOS WisePOS E and Stripe S700.
+   * @param collectInputsParameters Parameters to configure forms
+   */
+  collectInputs(
+    collectInputsParameters: ICollectInputsParameters
+  ): Promise<ErrorResponse | Array<ICollectInputsResult>>;
+  /**
+   * Cancels an in-flight request made by collectInputs
+   */
+  cancelCollectInputs(): Promise<ErrorResponse | {}>;
   /**
    * Requests the Terminal object to collect a card source from the reader that
    * can be charged.
