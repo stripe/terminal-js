@@ -398,7 +398,7 @@ export class Terminal {
   /**
    * Cancels an in-flight request made by collectInputs
    */
-  cancelCollectInputs(): Promise<ErrorResponse | {}>;
+  cancelCollectInputs(): Promise<ErrorResponse | ICancelResponse>;
   /**
    * Requests the Terminal object to collect a card source from the reader that
    * can be charged.
