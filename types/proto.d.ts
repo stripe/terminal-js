@@ -308,6 +308,9 @@ export interface IPaymentMethodDetails {
 
   /** PaymentMethodDetails interac_present */
   interac_present?: ICardPresent | null;
+
+  /** PaymentMethodDetails wechat_pay */
+  wechat_pay?: IWechatPay | null;
 }
 /** Properties of a Refund. */
 interface IRefund {
@@ -474,7 +477,23 @@ interface ICardPresent {
 
   /** CardPresent authorization_code */
   authorization_code?: string | null;
+
+  /** CardPresent location */
+  location?: string | null;
 }
+
+interface IWechatPay {
+
+  /** WechatPay reader */
+  reader?: string | null;
+
+  /** WechatPay location */
+  location?: string | null;
+
+  /** WeChat Pay transactionId */
+  transactionId?: string | null;
+}
+
 /** Properties of a Source. */
 export interface ISource {
   /** Unique identifier for the source card object. */
@@ -537,6 +556,9 @@ export interface IPaymentIntent {
 
   /** ID for payment method */
   payment_method?: string | null;
+
+  /** PaymentMethod types supported on the payment intent */
+  payment_method_types?: (string[]|null);
 }
 
 export interface ISetupIntent {
