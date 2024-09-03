@@ -494,6 +494,15 @@ export class Terminal {
   getSimulatorConfiguration(): SimulatorConfiguration;
   overrideBaseURL(url: string): void;
 
+  /**
+   * Changes settings on the connected reader.
+   *
+   * @param request The request with the values to set on the reader.
+   */
   setReaderSettings(request: ISetReaderSettingsRequest): Promise<IReaderSettings>;
+
+  /**
+   * Retrieves current settings from the connected reader.
+   */
   getReaderSettings(): Promise<IReaderSettings>;
 }
