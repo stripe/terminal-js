@@ -856,3 +856,21 @@ type Request3dSecureType = "automatic"| "any";
 /** Method enum. */
 type Method =
 "automatic"| "manual";
+
+type ITextToSpeechStatus = 'off' | 'headphones' | 'speakers';
+
+export interface IAccessibilitySettings {
+  textToSpeechStatus: ITextToSpeechStatus;
+}
+
+export interface IReaderSettings {
+  accessibilitySettings: IAccessibilitySettings | IErrorResponse;
+}
+
+export interface IAccessibilityParameters {
+  enableTextToSpeechSpeakers: boolean;
+}
+
+export interface ISetReaderSettingsRequest {
+  accessibility_parameters?: null | IAccessibilityParameters;
+}

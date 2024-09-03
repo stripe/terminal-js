@@ -11,6 +11,7 @@ import {
   ITipConfiguration,
   IRefund,
   IPaymentIntentExpandedMethod,
+  IReaderSettings, ISetReaderSettingsRequest,
 } from './proto';
 
 export {
@@ -110,7 +111,7 @@ export interface ICollectConfig {
   surcharge_notice?: string | null;
 
   // Request ability to offer dynamic currency conversion (DCC) if the card is eligible.
-  request_dynamic_currency_conversion?: 'if_available' | 'never' | null;
+  request_dynamic_currency_conversion?: boolean | null;
 }
 
 // Contains per-transaction configuration information relevant to collecting tips
@@ -492,4 +493,7 @@ export class Terminal {
   setSimulatorConfiguration(config: any): void;
   getSimulatorConfiguration(): SimulatorConfiguration;
   overrideBaseURL(url: string): void;
+
+  setReaderSettings(request: ISetReaderSettingsRequest): Promise<IReaderSettings>;
+  getReaderSettings(): Promise<IReaderSettings>;
 }
