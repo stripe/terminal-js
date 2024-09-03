@@ -108,6 +108,9 @@ export interface ICollectConfig {
 
   // Optional notice to display on the payment collection screen to inform the customer of a surcharge.
   surcharge_notice?: string | null;
+
+  // Request ability to offer dynamic currency conversion (DCC) if the card is eligible.
+  request_dynamic_currency_conversion?: 'if_available' | 'never' | null;
 }
 
 // Contains per-transaction configuration information relevant to collecting tips
