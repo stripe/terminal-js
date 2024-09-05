@@ -11,6 +11,7 @@ import {
   ITipConfiguration,
   IRefund,
   IPaymentIntentExpandedMethod,
+  IReaderSettings, ISetReaderSettingsRequest,
 } from './proto';
 
 export {
@@ -108,6 +109,9 @@ export interface ICollectConfig {
 
   // Optional notice to display on the payment collection screen to inform the customer of a surcharge.
   surcharge_notice?: string | null;
+
+  // Request ability to offer dynamic currency conversion (DCC) if the card is eligible.
+  request_dynamic_currency_conversion?: boolean | null;
 }
 
 // Contains per-transaction configuration information relevant to collecting tips
@@ -489,4 +493,16 @@ export class Terminal {
   setSimulatorConfiguration(config: any): void;
   getSimulatorConfiguration(): SimulatorConfiguration;
   overrideBaseURL(url: string): void;
+
+  /**
+   * Changes settings on the connected reader.
+   *
+   * @param request The request with the values to set on the reader.
+   */
+  setReaderSettings(request: ISetReaderSettingsRequest): Promise<IReaderSettings>;
+
+  /**
+   * Retrieves current settings from the connected reader.
+   */
+  getReaderSettings(): Promise<IReaderSettings>;
 }
