@@ -43,6 +43,12 @@ export enum OutputLogLevel {
   VERBOSE = 'verbose',
 }
 
+export enum AllowRedisplay {
+  ALWAYS = 'always',
+  LIMITED = 'limited',
+  UNSPECIFIED = 'unspecified',
+}
+
 export declare type ConnectionToken = string;
 export declare type FetchConnectionTokenFn = () => Promise<ConnectionToken>;
 
@@ -112,6 +118,10 @@ export interface ICollectConfig {
 
   // Request ability to offer dynamic currency conversion (DCC) if the card is eligible.
   request_dynamic_currency_conversion?: boolean | null;
+
+  // Required if `setup_future_usage` is set; otherwise, it defaults to `unspecified`.
+  // An enum value indicating whether future checkout flows can show this payment method to its customer.
+  allow_redisplay?: AllowRedisplay | null;
 }
 
 // Contains per-transaction configuration information relevant to collecting tips
@@ -125,6 +135,12 @@ export interface ITippingConfig {
 export interface IProcessConfig {
   // Surcharge amount to be applied to the payment.
   amount_surcharge?: number | null;
+}
+
+// Contains configuration information relevant to collecting a setup intent.
+export interface ISetupIntentConfig {
+  // Whether to show a cancel button in transaction UI on Stripe smart readers.
+  enable_customer_cancellation?: boolean | null;
 }
 
 export declare type ConnectOptions = Pick<
@@ -450,12 +466,13 @@ export class Terminal {
    * Requests the Terminal object to collect a card source from the reader that
    * can be saved via a SetupIntent.
    * @param clientSecret Request object containing the setup intent secret of the intent to attach The
-   * @param customerConsentCollected boolean indicating whether or not customer consent to save their card was collected
-   * source to.
+   * @param customerConsentCollectedOrAllowRedisplay field indicating whether this payment method can be shown again to its customer in a checkout flow.
+   * @param config an optional object containing collection configuration.
    */
   collectSetupIntentPaymentMethod(
     clientSecret: string,
-    customerConsentCollected: boolean
+    customerConsentCollectedOrAllowRedisplay: boolean | AllowRedisplay,
+    config: ISetupIntentConfig | null
   ): Promise<ErrorResponse | {setupIntent: ISetupIntent}>;
 
   /**
