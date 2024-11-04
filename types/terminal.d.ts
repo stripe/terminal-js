@@ -11,7 +11,8 @@ import {
   ITipConfiguration,
   IRefund,
   IPaymentIntentExpandedMethod,
-  IReaderSettings, ISetReaderSettingsRequest,
+  IReaderSettings,
+  ISetReaderSettingsRequest,
 } from './proto';
 
 export {
@@ -516,7 +517,9 @@ export class Terminal {
    *
    * @param request The request with the values to set on the reader.
    */
-  setReaderSettings(request: ISetReaderSettingsRequest): Promise<IReaderSettings>;
+  setReaderSettings(
+    request: ISetReaderSettingsRequest
+  ): Promise<IReaderSettings>;
 
   /**
    * Retrieves current settings from the connected reader.
