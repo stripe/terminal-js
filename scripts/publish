@@ -3,7 +3,8 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-RELEASE_TYPE=${1:-}
+RELEASE_TYPE=""
+RELEASE=false
 
 echo_help() {
   cat << EOF
@@ -75,13 +76,29 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
-# Show help message if -h, --help, or help passed
-case $1 in
-  -h | --help | help)
-    echo_help
-    exit 0
-    ;;
-esac
+# Parse command-line arguments
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -r)
+      RELEASE=true
+      shift
+      ;;
+    # Show help message if -h, --help, or help passed
+    -h | --help | help)
+          echo_help
+          exit 0
+          ;;
+    *)
+      if [[ -z "$RELEASE_TYPE" ]]; then
+        RELEASE_TYPE="$1"
+        shift
+      else
+        echo "Invalid argument: $1"
+        exit 1
+      fi
+      ;;
+  esac
+done
 
 # Validate passed release type
 case $RELEASE_TYPE in
@@ -125,13 +142,19 @@ yarn -s install --frozen-lockfile
 echo "Linting, testing, and building"
 yarn -s run ci
 
-echo "Tagging and publishing $RELEASE_TYPE release"
-yarn -s --ignore-scripts publish --$RELEASE_TYPE --access=public
+if $RELEASE; then
+  echo "Tagging and publishing $RELEASE_TYPE release"
+  yarn -s --ignore-scripts publish --$RELEASE_TYPE --access=public
 
-echo "Pushing git commit and tag"
-git push --follow-tags
+  echo "Pushing git commit and tag"
+  git push --follow-tags
 
-echo "Publish successful!"
-echo ""
+  echo "Publish successful!"
+  echo ""
+  create_github_release
+else
+  yarn version --$RELEASE_TYPE --no-git-tag-version
+  echo "check package.json for the modified version. That will be the version that is published to npm.
+  Once you have verified, reset the git diff and run this script with -r"
+fi
 
-create_github_release
