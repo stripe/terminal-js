@@ -123,6 +123,10 @@ export interface ICollectConfig {
   // Required if `setup_future_usage` is set; otherwise, it defaults to `unspecified`.
   // An enum value indicating whether future checkout flows can show this payment method to its customer.
   allow_redisplay?: AllowRedisplay | null;
+
+  // Collect and process the payment as a Mail Order/Telephone Order payment. Contact Stripe support to enable this feature on your account.
+  // For more information, see the official Stripe docs: [Mail Order Telephone Order transactions](https://support.stripe.com/questions/mail-order-telephone-order-(moto)-transactions-when-to-categorize-transactions-as-moto)
+  moto?: boolean | null;
 }
 
 // Contains per-transaction configuration information relevant to collecting tips
@@ -142,6 +146,10 @@ export interface IProcessConfig {
 export interface ISetupIntentConfig {
   // Whether to show a cancel button in transaction UI on Stripe smart readers.
   enable_customer_cancellation?: boolean | null;
+
+  // Save the payment method using the Mail Order/Telephone Order feature. Contact Stripe support to enable this feature on your account.
+  // For more information, see the official Stripe docs: [Mail Order Telephone Order transactions](https://support.stripe.com/questions/mail-order-telephone-order-(moto)-transactions-when-to-categorize-transactions-as-moto)
+  moto?: boolean | null;
 }
 
 export declare type ConnectOptions = Pick<
