@@ -60,7 +60,7 @@
     "typescript": "^3.7.4"
   },
   "dependencies": {
-    "stripe": "^8.184.0",
+    "stripe": "^8.222.0",
     "ws": "6.2.3"
   }
 }

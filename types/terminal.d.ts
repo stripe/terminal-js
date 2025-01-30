@@ -91,9 +91,31 @@ export declare type TerminalProps = TerminalOptions & TerminalCallbacks;
 
 export declare type PaymentIntentClientSecret = string;
 
-export declare type DeviceType = Stripe.Terminal.Reader.DeviceType;
+export enum DeviceType {
+  P400 = 'verifone_P400',
+  WISEPOSE = 'bbpos_wisepos_e',
+  S700 = 'stripe_s700',
+}
 
-export declare type Reader = Stripe.Terminal.Reader;
+export interface Metadata {
+  [name: string]: string;
+}
+
+export interface Reader {
+  id: string;
+  object: 'terminal.reader';
+  deleted?: void;
+  device_sw_version: string | null;
+  device_type: DeviceType;
+  ip_address: string | null;
+  label: string;
+  livemode: boolean;
+  location: string | null;
+  metadata: Metadata;
+  serial_number: string;
+  status: 'online' | 'offline' | null;
+  base_url?: string | null;
+}
 
 export declare type IPaymentIntent = Stripe.PaymentIntent;
 export declare type ISetupIntent = Stripe.SetupIntent;
