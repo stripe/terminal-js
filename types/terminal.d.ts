@@ -13,6 +13,9 @@ import {
   IPaymentIntentExpandedMethod,
   IReaderSettings,
   ISetReaderSettingsRequest,
+  IAccessibilitySettings,
+  IAccessibilityParameters,
+  ITextToSpeechStatus,
 } from './proto';
 
 export {
@@ -24,6 +27,11 @@ export {
   ISetReaderDisplayRequest,
   ITipConfiguration,
   IRefund,
+  IReaderSettings,
+  ISetReaderSettingsRequest,
+  IAccessibilitySettings,
+  IAccessibilityParameters,
+  ITextToSpeechStatus,
 };
 
 export enum PaymentStatus {
