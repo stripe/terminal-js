@@ -148,6 +148,11 @@ export interface ITippingConfig {
 export interface IProcessConfig {
   // Surcharge amount to be applied to the payment.
   amount_surcharge?: number | null;
+
+  // The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method’s app or site.
+  // If you’d prefer to redirect to a mobile application, you can alternatively supply an application URI scheme.
+  // This parameter is only used for redirect-based payment methods.
+  return_url?: string | null;
 }
 
 // Contains configuration information relevant to collecting a setup intent.
