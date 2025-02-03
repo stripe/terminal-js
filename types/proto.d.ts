@@ -857,7 +857,7 @@ type Request3dSecureType = "automatic"| "any";
 type Method =
 "automatic"| "manual";
 
-type ITextToSpeechStatus = 'off' | 'headphones' | 'speakers';
+export type ITextToSpeechStatus = 'off' | 'headphones' | 'speakers';
 
 export interface IAccessibilitySettings {
   textToSpeechStatus: ITextToSpeechStatus;

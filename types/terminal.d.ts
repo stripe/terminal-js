@@ -13,6 +13,9 @@ import {
   IPaymentIntentExpandedMethod,
   IReaderSettings,
   ISetReaderSettingsRequest,
+  IAccessibilitySettings,
+  IAccessibilityParameters,
+  ITextToSpeechStatus,
 } from './proto';
 
 export {
@@ -24,6 +27,11 @@ export {
   ISetReaderDisplayRequest,
   ITipConfiguration,
   IRefund,
+  IReaderSettings,
+  ISetReaderSettingsRequest,
+  IAccessibilitySettings,
+  IAccessibilityParameters,
+  ITextToSpeechStatus,
 };
 
 export enum PaymentStatus {
@@ -123,6 +131,10 @@ export interface ICollectConfig {
   // Required if `setup_future_usage` is set; otherwise, it defaults to `unspecified`.
   // An enum value indicating whether future checkout flows can show this payment method to its customer.
   allow_redisplay?: AllowRedisplay | null;
+
+  // Collect and process the payment as a Mail Order/Telephone Order payment. Contact Stripe support to enable this feature on your account.
+  // For more information, see the official Stripe docs: [Mail Order Telephone Order transactions](https://support.stripe.com/questions/mail-order-telephone-order-(moto)-transactions-when-to-categorize-transactions-as-moto)
+  moto?: boolean | null;
 }
 
 // Contains per-transaction configuration information relevant to collecting tips
@@ -136,12 +148,21 @@ export interface ITippingConfig {
 export interface IProcessConfig {
   // Surcharge amount to be applied to the payment.
   amount_surcharge?: number | null;
+
+  // The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method’s app or site.
+  // If you’d prefer to redirect to a mobile application, you can alternatively supply an application URI scheme.
+  // This parameter is only used for redirect-based payment methods.
+  return_url?: string | null;
 }
 
 // Contains configuration information relevant to collecting a setup intent.
 export interface ISetupIntentConfig {
   // Whether to show a cancel button in transaction UI on Stripe smart readers.
   enable_customer_cancellation?: boolean | null;
+
+  // Save the payment method using the Mail Order/Telephone Order feature. Contact Stripe support to enable this feature on your account.
+  // For more information, see the official Stripe docs: [Mail Order Telephone Order transactions](https://support.stripe.com/questions/mail-order-telephone-order-(moto)-transactions-when-to-categorize-transactions-as-moto)
+  moto?: boolean | null;
 }
 
 export declare type ConnectOptions = Pick<
