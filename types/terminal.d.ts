@@ -540,10 +540,10 @@ export class Terminal {
    */
   setReaderSettings(
     request: ISetReaderSettingsRequest
-  ): Promise<IReaderSettings>;
+  ): Promise<IReaderSettings | ErrorResponse>;
 
   /**
    * Retrieves current settings from the connected reader.
    */
-  getReaderSettings(): Promise<IReaderSettings>;
+  getReaderSettings(): Promise<IReaderSettings | ErrorResponse>;
 }
