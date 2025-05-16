@@ -188,11 +188,34 @@ export declare type ExposedError = {
   failure_balance_transaction?: string;
 };
 
+export enum SimulatedCollectInputsResultType {
+  SUCCEEDED = 'succeeded',
+  TIMEOUT = 'timeout',
+}
+
+export interface ISimulatedCollectInputsResult {
+  resultType: SimulatedCollectInputsResultType;
+}
+
+export enum SimulatedCollectInputsSkipBehavior {
+  NONE = 'none',
+  ALL = 'all',
+}
+
+export interface ISimulatedCollectInputsResultSucceeded extends
+    ISimulatedCollectInputsResult {
+  skipBehavior: SimulatedCollectInputsSkipBehavior;
+}
+
+export interface ISimulatedCollectInputsResultTimeout extends
+    ISimulatedCollectInputsResult {}
+
 export interface SimulatorConfiguration {
   paymentMethodType?: 'interac_present' | null;
   testPaymentMethod?: string | null;
   testCardNumber?: string | null;
   tipAmount?: number | null;
+  collectInputsResult?: ISimulatedCollectInputsResult | null;
 }
 
 export interface DiscoveryMethodConfiguration {
@@ -281,6 +304,8 @@ export interface ISelectionButton {
   style: SelectionButtonStyle;
   // Set the button text
   text: string;
+  // Set the button id
+  id: string;
 }
 
 // Contains information about a selection form to display on the reader
@@ -345,6 +370,8 @@ export interface ICollectInputsResult {
 export interface SelectionResult extends ICollectInputsResult {
   // selected button. Null if the form was skipped.
   selection?: string | null;
+  // selected button ID. Null if the form was skipped.
+  selectionId?: string | null;
 }
 
 // Contains data collected from a signature form
