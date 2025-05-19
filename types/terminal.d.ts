@@ -202,13 +202,13 @@ export enum SimulatedCollectInputsSkipBehavior {
   ALL = 'all',
 }
 
-export interface ISimulatedCollectInputsResultSucceeded extends
-    ISimulatedCollectInputsResult {
+export interface ISimulatedCollectInputsResultSucceeded
+  extends ISimulatedCollectInputsResult {
   skipBehavior: SimulatedCollectInputsSkipBehavior;
 }
 
-export interface ISimulatedCollectInputsResultTimeout extends
-    ISimulatedCollectInputsResult {}
+export interface ISimulatedCollectInputsResultTimeout
+  extends ISimulatedCollectInputsResult {}
 
 export interface SimulatorConfiguration {
   paymentMethodType?: 'interac_present' | null;
