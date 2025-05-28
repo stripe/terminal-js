@@ -311,6 +311,9 @@ export interface IPaymentMethodDetails {
 
   /** PaymentMethodDetails wechat_pay */
   wechat_pay?: IWechatPay | null;
+
+  /** PaymentMethodDetails affirm */
+  affirm?: IAffirm | null;
 }
 /** Properties of a Refund. */
 interface IRefund {
@@ -491,6 +494,18 @@ interface IWechatPay {
   location?: string | null;
 
   /** WeChat Pay transactionId */
+  transactionId?: string | null;
+}
+
+interface IAffirm {
+
+  /** Affirm reader */
+  reader?: string | null;
+
+  /** Affirm location */
+  location?: string | null;
+
+  /** Affirm transactionId */
   transactionId?: string | null;
 }
 
