@@ -486,6 +486,7 @@ export class Terminal {
         paymentIntent: ISdkManagedPaymentIntent;
       }
   >;
+  cancelCollectPaymentMethod(): Promise<ErrorResponse | ICancelResponse>;
   /**
    * Confirms the payment intent which causes the charging of the user card.
    * @param request Object containing the payment intent to confirm.
@@ -501,7 +502,6 @@ export class Terminal {
         paymentIntent: IPaymentIntent;
       }
   >;
-  cancelCollectPaymentMethod(): Promise<ErrorResponse | ICancelResponse>;
   readReusableCard(options?: {
     customer?: string;
   }): Promise<
@@ -545,6 +545,7 @@ export class Terminal {
     currency: string,
     options?: RefundOptions
   ): Promise<ErrorResponse | ICollectRefundPaymentMethodResponse>;
+  cancelCollectRefundPaymentMethod(): Promise<ErrorResponse | ICancelResponse>;
 
   processRefund(): Promise<
     | ErrorResponse
@@ -554,7 +555,6 @@ export class Terminal {
       }
   >;
 
-  cancelCollectRefundPaymentMethod(): Promise<ErrorResponse | ICancelResponse>;
   cancelReadReusableCard(): Promise<ErrorResponse | ICancelResponse>;
   setSimulatorConfiguration(config: any): void;
   getSimulatorConfiguration(): SimulatorConfiguration;
