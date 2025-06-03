@@ -502,6 +502,7 @@ export class Terminal {
         paymentIntent: IPaymentIntent;
       }
   >;
+  cancelProcessPayment(): Promise<ErrorResponse | ICancelResponse>;
   readReusableCard(options?: {
     customer?: string;
   }): Promise<
@@ -538,6 +539,7 @@ export class Terminal {
   confirmSetupIntent(
     setupIntent: ISetupIntent
   ): Promise<ErrorResponse | {setupIntent: ISetupIntent}>;
+  cancelConfirmSetupIntent(): Promise<ErrorResponse | ICancelResponse>;
 
   collectRefundPaymentMethod(
     charge_id: string,
@@ -554,6 +556,7 @@ export class Terminal {
         refund: IRefund;
       }
   >;
+  cancelProcessRefund(): Promise<ErrorResponse | ICancelResponse>;
 
   cancelReadReusableCard(): Promise<ErrorResponse | ICancelResponse>;
   setSimulatorConfiguration(config: any): void;
