@@ -314,6 +314,9 @@ export interface IPaymentMethodDetails {
 
   /** PaymentMethodDetails affirm */
   affirm?: IAffirm | null;
+
+  /** PaymentMethodDetails paynow */
+  paynow?: IPaynow | null;
 }
 /** Properties of a Refund. */
 interface IRefund {
@@ -507,6 +510,18 @@ interface IAffirm {
 
   /** Affirm transactionId */
   transactionId?: string | null;
+}
+
+interface IPaynow {
+
+  /** Paynow reader */
+  reader?: string | null;
+
+  /** Paynow location */
+  location?: string | null;
+
+  /** Paynow reference */
+  reference?: string | null;
 }
 
 /** Properties of a Source. */
