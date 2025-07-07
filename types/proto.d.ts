@@ -314,6 +314,9 @@ export interface IPaymentMethodDetails {
 
   /** PaymentMethodDetails affirm */
   affirm?: IAffirm | null;
+
+  /** PaymentMethodDetails alipay */
+  alipay?: IAlipay | null;
 }
 /** Properties of a Refund. */
 interface IRefund {
@@ -506,6 +509,18 @@ interface IAffirm {
   location?: string | null;
 
   /** Affirm transactionId */
+  transactionId?: string | null;
+}
+
+interface IAlipay {
+
+  /** Alipay buyerId */
+  buyerId?: string | null;
+
+  /** Alipay location */
+  fingerprint?: string | null;
+
+  /** Alipay transactionId */
   transactionId?: string | null;
 }
 
