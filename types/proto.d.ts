@@ -314,6 +314,9 @@ export interface IPaymentMethodDetails {
 
   /** PaymentMethodDetails affirm */
   affirm?: IAffirm | null;
+
+  /** PaymentMethodDetails klarna */
+  klarna?: IKlarna | null;
 }
 /** Properties of a Refund. */
 interface IRefund {
@@ -507,6 +510,18 @@ interface IAffirm {
 
   /** Affirm transactionId */
   transactionId?: string | null;
+}
+
+interface IKlarna {
+
+  /** Klarna payerDetails */
+  payerDetails?: string | null;
+
+  /** Klarna paymentMethodCategory */
+  paymentMethodCategory?: string | null;
+
+  /** Klarna preferredLocale */
+  preferredLocale?: string | null;
 }
 
 /** Properties of a Source. */
