@@ -67,6 +67,7 @@ export declare type IClearCachedCredentialsResponse = Record<string, never>;
 export declare type IClearReaderDisplayResponse = Record<string, never>;
 export declare type ICollectRefundPaymentMethodResponse = Record<string, never>;
 export declare type IDisconnectResponse = Record<string, never>;
+export declare type IPrintResponse = Record<string, never>;
 
 interface IPaymentMethod extends SdkIPaymentMethod {
   payment_intent?: IPaymentIntentExpandedMethod | null;
@@ -404,6 +405,9 @@ export interface NumericResult extends ICollectInputsResult {
   numericString?: string | null;
 }
 
+// Represents the content to print to a reader's embedded printer.
+export type IPrintContent = HTMLCanvasElement;
+
 export class Terminal {
   /**
    * Returns the current connection status of the PIN pad.
@@ -576,4 +580,10 @@ export class Terminal {
    * Retrieves current settings from the connected reader.
    */
   getReaderSettings(): Promise<IReaderSettings | ErrorResponse>;
+
+  /**
+   * Prints the specified content to the connected reader's printer, if available.
+   * @param content The content to print. Currently only supports `HTMLCanvasElement`.
+   */
+  print(content: IPrintContent): Promise<IPrintResponse | ErrorResponse>;
 }
