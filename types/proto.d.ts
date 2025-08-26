@@ -317,6 +317,9 @@ export interface IPaymentMethodDetails {
 
   /** PaymentMethodDetails paynow */
   paynow?: IPaynow | null;
+  
+  /** PaymentMethodDetails paypay */
+  paypay?: IPaypay | null;
 }
 /** Properties of a Refund. */
 interface IRefund {
@@ -522,6 +525,15 @@ interface IPaynow {
 
   /** Paynow reference */
   reference?: string | null;
+}
+
+interface IPaypay {
+
+  /** Paypay reader */
+  reader?: string | null;
+
+  /** Paypay location */
+  location?: string | null;
 }
 
 /** Properties of a Source. */
