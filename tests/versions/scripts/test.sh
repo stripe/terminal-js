@@ -20,5 +20,11 @@ versions=(
 for version in ${versions[@]}; do
   echo "--- Testing with TypeScript version $version"
   yarn add -s --no-progress typescript@$version
-  yarn run tsc
+
+  if [ "$version" == "next" ]; then
+    # Add ignoreDeprecations option for 'next' version
+    yarn run tsc --ignoreDeprecations 6.0
+  else
+    yarn run tsc
+  fi
 done
