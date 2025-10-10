@@ -145,15 +145,38 @@ export interface ITippingConfig {
   eligible_amount?: number | null;
 }
 
+// Whether to collect surcharge consent from the customer.
+export enum SurchargeConsentCollection {
+  ENABLED = 'enabled',
+  DISABLED = 'disabled',
+}
+
+// Configuration information relevant to displaying surcharge consent to the customer.
+export interface ISurchargeConsent {
+  // Whether to collect surcharge consent from the customer.
+  collection: SurchargeConsentCollection;
+  // Display a custom message on the surcharge consent screen to the customer.
+  notice?: string | null;
+}
+
+export interface ISurchargeConfiguration {
+  // Amount surcharge to apply to the transaction. Must be a positive non-zero number
+  amount: number;
+  // Configuration for the surcharge consent.
+  consent: ISurchargeConsent;
+}
 // Contains configuration information relevant to processing/confirming a payment method.
 export interface IProcessConfig {
-  // Surcharge amount to be applied to the payment.
+  // [Deprecated in favor of surcharge.amount] Surcharge amount to be applied to the payment.
   amount_surcharge?: number | null;
 
   // The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method’s app or site.
   // If you’d prefer to redirect to a mobile application, you can alternatively supply an application URI scheme.
   // This parameter is only used for redirect-based payment methods.
   return_url?: string | null;
+
+  // Configuration for the surcharge.
+  surcharge?: ISurchargeConfiguration | null;
 }
 
 // Contains configuration information relevant to collecting a setup intent.
