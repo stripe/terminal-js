@@ -501,6 +501,9 @@ interface IWechatPay {
 
   /** WeChat Pay transactionId */
   transactionId?: string | null;
+
+  /** WeChat Pay fingerprint */
+  fingerprint?: string | null;
 }
 
 interface IAffirm {
