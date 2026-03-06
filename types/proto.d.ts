@@ -540,15 +540,11 @@ interface IPaypay {
 }
 
 interface IKlarna {
+  /** Klarna reader */
+  reader?: string | null;
 
-  /** Klarna payerDetails */
-  payerDetails?: string | null;
-
-  /** Klarna paymentMethodCategory */
-  paymentMethodCategory?: string | null;
-
-  /** Klarna preferredLocale */
-  preferredLocale?: string | null;
+  /** Klarna location */
+  location?: string | null;
 }
 
 /** Properties of a Source. */
