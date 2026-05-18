@@ -317,9 +317,12 @@ export interface IPaymentMethodDetails {
 
   /** PaymentMethodDetails paynow */
   paynow?: IPaynow | null;
-  
+
   /** PaymentMethodDetails paypay */
   paypay?: IPaypay | null;
+
+  /** PaymentMethodDetails klarna */
+  klarna?: IKlarna | null;
 }
 /** Properties of a Refund. */
 interface IRefund {
@@ -533,6 +536,14 @@ interface IPaypay {
   reader?: string | null;
 
   /** Paypay location */
+  location?: string | null;
+}
+
+interface IKlarna {
+  /** Klarna reader */
+  reader?: string | null;
+
+  /** Klarna location */
   location?: string | null;
 }
 
