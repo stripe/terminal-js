@@ -62,5 +62,8 @@
   "dependencies": {
     "stripe": "^8.222.0",
     "ws": "6.2.3"
+  },
+  "bugs": {
+    "url": "https://github.com/stripe/terminal-js/issues"
   }
 }
