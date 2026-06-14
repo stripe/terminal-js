@@ -27,6 +27,13 @@
   "author": "Stripe (https://www.stripe.com)",
   "license": "MIT",
   "homepage": "https://stripe.com/docs/terminal/sdk/js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stripe/terminal-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stripe/terminal-js/issues"
+  },
   "files": [
     "dist",
     "src",
