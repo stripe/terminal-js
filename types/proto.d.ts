@@ -323,6 +323,9 @@ export interface IPaymentMethodDetails {
 
   /** PaymentMethodDetails klarna */
   klarna?: IKlarna | null;
+
+  /** PaymentMethodDetails swish */
+  swish?: ISwish | null;  
 }
 /** Properties of a Refund. */
 interface IRefund {
@@ -544,6 +547,15 @@ interface IKlarna {
   reader?: string | null;
 
   /** Klarna location */
+  location?: string | null;
+}
+
+interface ISwish {
+
+  /** Swish reader */
+  reader?: string | null;
+
+  /** Swish location */
   location?: string | null;
 }
 
