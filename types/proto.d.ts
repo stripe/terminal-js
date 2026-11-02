@@ -325,7 +325,11 @@ export interface IPaymentMethodDetails {
   klarna?: IKlarna | null;
 
   /** PaymentMethodDetails swish */
-  swish?: ISwish | null;  
+  swish?: ISwish | null;
+
+  /** PaymentMethodDetails alipay_plus */
+  alipay_plus?: IAlipayPlus | null;  
+  
 }
 /** Properties of a Refund. */
 interface IRefund {
@@ -556,6 +560,15 @@ interface ISwish {
   reader?: string | null;
 
   /** Swish location */
+  location?: string | null;
+}
+
+interface IAlipayPlus {
+
+  /** Alipay+ reader */
+  reader?: string | null;
+
+  /** Alipay+ location */
   location?: string | null;
 }
 
